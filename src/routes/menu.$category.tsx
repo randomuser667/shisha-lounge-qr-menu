@@ -28,6 +28,41 @@ export const Route = createFileRoute("/menu/$category")({
   component: CategorySlide,
 });
 
+type Puff = { left: string; delay: string; duration: string; drift: string; gold?: boolean };
+
+// Big, slow smoke clouds that fill the whole screen behind the shisha slide.
+const PAGE_PUFFS: Puff[] = [
+  { left: "-10%", delay: "0s", duration: "17s", drift: "70px" },
+  { left: "8%", delay: "4s", duration: "20s", drift: "-60px", gold: true },
+  { left: "26%", delay: "1.5s", duration: "15s", drift: "80px" },
+  { left: "42%", delay: "6s", duration: "22s", drift: "-70px" },
+  { left: "58%", delay: "2.5s", duration: "18s", drift: "60px", gold: true },
+  { left: "74%", delay: "8s", duration: "19s", drift: "-50px" },
+  { left: "88%", delay: "5s", duration: "16s", drift: "40px" },
+];
+
+function PageSmoke() {
+  return (
+    <span className="page-smoke" aria-hidden="true">
+      <span className="page-smoke__base" />
+      {PAGE_PUFFS.map((p) => (
+        <span
+          key={p.left}
+          className={`page-smoke__puff${p.gold ? " page-smoke__puff--gold" : ""}`}
+          style={
+            {
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+              "--drift": p.drift,
+            } as React.CSSProperties
+          }
+        />
+      ))}
+    </span>
+  );
+}
+
 function BackButton({ label }: { label: string }) {
   return (
     <Link
@@ -59,6 +94,8 @@ function CategorySlide() {
 
   return (
     <div className="mx-auto max-w-xl px-5 pb-16">
+      {cat.id === "shisha" && <PageSmoke />}
+
       <div className="sticky top-0 z-10 -mx-5 flex items-center justify-between gap-3 bg-background/85 px-5 py-3 backdrop-blur">
         <BackButton label={lang === "hu" ? "Vissza" : "Back"} />
         <LangToggle />
@@ -91,8 +128,10 @@ function CategorySlide() {
         <BackButton label={lang === "hu" ? "Vissza az étlaphoz" : "Back to menu"} />
       </div>
 
-      <footer className="mt-10 text-center text-xs text-muted-foreground">
-        <p>{lang === "hu" ? "Az árak forintban, az ÁFA-t tartalmazzák." : "Prices in HUF, VAT included."}</p>
+      <footer className="mt-10 text-center text-xs text-foreground/80">
+        <p className="inline-block rounded-full bg-background px-3 py-1">
+          {lang === "hu" ? "Az árak forintban, az ÁFA-t tartalmazzák." : "Prices in HUF, VAT included."}
+        </p>
       </footer>
     </div>
   );

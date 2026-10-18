@@ -179,8 +179,8 @@
   will-change: transform, opacity;
   background: radial-gradient(
     ellipse at 50% 78%,
-    oklch(0.93 0.03 305 / 55%),
-    oklch(0.8 0.05 305 / 22%) 46%,
+    oklch(0.93 0.03 305 / 78%),
+    oklch(0.8 0.05 305 / 36%) 46%,
     transparent 76%
   );
   animation: card-smoke-rise 7s ease-in infinite;
@@ -203,14 +203,14 @@
   bottom: -18px;
   height: 60px;
   filter: blur(12px);
-  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.04 305 / 34%), transparent 72%);
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.04 305 / 48%), transparent 72%);
 }
 
 @keyframes card-smoke-rise {
   0%   { transform: translate3d(0, 0, 0) scale(0.35) rotate(0deg); opacity: 0; }
-  14%  { opacity: 0.9; }
-  45%  { transform: translate3d(calc(var(--drift, 12px) * -0.5), -58px, 0) scale(1.15) rotate(-7deg); opacity: 0.6; }
-  75%  { opacity: 0.32; }
+  14%  { opacity: 1; }
+  45%  { transform: translate3d(calc(var(--drift, 12px) * -0.5), -58px, 0) scale(1.15) rotate(-7deg); opacity: 0.72; }
+  75%  { opacity: 0.42; }
   100% { transform: translate3d(var(--drift, 12px), -165px, 0) scale(2.4) rotate(9deg); opacity: 0; }
 }
 
@@ -219,6 +219,114 @@
     animation: none;
     opacity: 0.14;
     transform: translate3d(0, -30%, 0) scale(1.2);
+  }
+}
+
+/* Per-category smoke tints */
+.card-smoke--gold .card-smoke__puff {
+  width: 62px;
+  height: 92px;
+  background: radial-gradient(
+    ellipse at 50% 78%,
+    oklch(0.86 0.11 85 / 68%),
+    oklch(0.72 0.1 80 / 32%) 46%,
+    transparent 76%
+  );
+}
+.card-smoke--gold .card-smoke__base {
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.82 0.11 85 / 40%), transparent 72%);
+}
+
+.card-smoke--cool .card-smoke__puff {
+  width: 58px;
+  height: 96px;
+  background: radial-gradient(
+    ellipse at 50% 78%,
+    oklch(0.94 0.05 245 / 70%),
+    oklch(0.8 0.07 255 / 32%) 46%,
+    transparent 76%
+  );
+}
+.card-smoke--cool .card-smoke__base {
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.03 290 / 38%), transparent 72%);
+}
+
+/* Thin, fast steam for the hot drinks & snacks card */
+.card-smoke--steam .card-smoke__puff {
+  width: 36px;
+  height: 84px;
+  filter: blur(10px);
+  background: radial-gradient(
+    ellipse at 50% 78%,
+    oklch(0.98 0.008 305 / 82%),
+    oklch(0.92 0.012 305 / 38%) 46%,
+    transparent 76%
+  );
+}
+.card-smoke--steam .card-smoke__base {
+  height: 44px;
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.94 0.02 305 / 42%), transparent 72%);
+}
+
+/* Full-screen rising smoke, shown behind the shisha slide */
+.page-smoke {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.page-smoke__puff {
+  position: absolute;
+  bottom: -300px;
+  width: 340px;
+  height: 460px;
+  border-radius: 50% 50% 46% 54% / 62% 62% 38% 38%;
+  opacity: 0;
+  filter: blur(28px);
+  will-change: transform, opacity;
+  background: radial-gradient(
+    ellipse at 50% 78%,
+    oklch(0.9 0.07 305 / 72%),
+    oklch(0.65 0.14 305 / 34%) 46%,
+    transparent 76%
+  );
+  animation: page-smoke-rise 18s ease-in infinite;
+}
+
+.page-smoke__puff--gold {
+  background: radial-gradient(
+    ellipse at 50% 78%,
+    oklch(0.85 0.12 85 / 48%),
+    oklch(0.7 0.1 80 / 24%) 46%,
+    transparent 76%
+  );
+}
+
+.page-smoke__base {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -80px;
+  height: 220px;
+  filter: blur(40px);
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.88 0.06 305 / 42%), transparent 74%);
+}
+
+@keyframes page-smoke-rise {
+  0%   { transform: translate3d(0, 0, 0) scale(0.5) rotate(0deg); opacity: 0; }
+  16%  { opacity: 1; }
+  50%  { transform: translate3d(calc(var(--drift, 40px) * -0.5), -48vh, 0) scale(1.5) rotate(-6deg); opacity: 0.72; }
+  80%  { opacity: 0.38; }
+  100% { transform: translate3d(var(--drift, 40px), -120vh, 0) scale(2.8) rotate(8deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-smoke__puff {
+    animation: none;
+    opacity: 0.1;
+    transform: translate3d(0, -20%, 0) scale(1.3);
   }
 }
 
