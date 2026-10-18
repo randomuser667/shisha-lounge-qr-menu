@@ -179,8 +179,8 @@
   will-change: transform, opacity;
   background: radial-gradient(
     ellipse at 50% 78%,
-    oklch(0.93 0.03 305 / 55%),
-    oklch(0.8 0.05 305 / 22%) 46%,
+    oklch(0.93 0.03 305 / 78%),
+    oklch(0.8 0.05 305 / 36%) 46%,
     transparent 76%
   );
   animation: card-smoke-rise 7s ease-in infinite;
@@ -203,14 +203,14 @@
   bottom: -18px;
   height: 60px;
   filter: blur(12px);
-  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.04 305 / 34%), transparent 72%);
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.04 305 / 48%), transparent 72%);
 }
 
 @keyframes card-smoke-rise {
   0%   { transform: translate3d(0, 0, 0) scale(0.35) rotate(0deg); opacity: 0; }
-  14%  { opacity: 0.9; }
-  45%  { transform: translate3d(calc(var(--drift, 12px) * -0.5), -58px, 0) scale(1.15) rotate(-7deg); opacity: 0.6; }
-  75%  { opacity: 0.32; }
+  14%  { opacity: 1; }
+  45%  { transform: translate3d(calc(var(--drift, 12px) * -0.5), -58px, 0) scale(1.15) rotate(-7deg); opacity: 0.72; }
+  75%  { opacity: 0.42; }
   100% { transform: translate3d(var(--drift, 12px), -165px, 0) scale(2.4) rotate(9deg); opacity: 0; }
 }
 
@@ -228,13 +228,13 @@
   height: 92px;
   background: radial-gradient(
     ellipse at 50% 78%,
-    oklch(0.86 0.11 85 / 46%),
-    oklch(0.72 0.1 80 / 18%) 46%,
+    oklch(0.86 0.11 85 / 68%),
+    oklch(0.72 0.1 80 / 32%) 46%,
     transparent 76%
   );
 }
 .card-smoke--gold .card-smoke__base {
-  background: radial-gradient(ellipse at 50% 100%, oklch(0.82 0.11 85 / 26%), transparent 72%);
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.82 0.11 85 / 40%), transparent 72%);
 }
 
 .card-smoke--cool .card-smoke__puff {
@@ -242,13 +242,13 @@
   height: 96px;
   background: radial-gradient(
     ellipse at 50% 78%,
-    oklch(0.93 0.03 290 / 44%),
-    oklch(0.78 0.05 300 / 16%) 46%,
+    oklch(0.93 0.03 290 / 66%),
+    oklch(0.78 0.05 300 / 30%) 46%,
     transparent 76%
   );
 }
 .card-smoke--cool .card-smoke__base {
-  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.03 290 / 24%), transparent 72%);
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.03 290 / 38%), transparent 72%);
 }
 
 /* Thin, fast steam for the hot drinks & snacks card */
@@ -258,14 +258,14 @@
   filter: blur(10px);
   background: radial-gradient(
     ellipse at 50% 78%,
-    oklch(0.96 0.02 305 / 52%),
-    oklch(0.88 0.03 305 / 20%) 46%,
+    oklch(0.96 0.02 305 / 76%),
+    oklch(0.88 0.03 305 / 34%) 46%,
     transparent 76%
   );
 }
 .card-smoke--steam .card-smoke__base {
   height: 44px;
-  background: radial-gradient(ellipse at 50% 100%, oklch(0.94 0.02 305 / 28%), transparent 72%);
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.94 0.02 305 / 42%), transparent 72%);
 }
 
 /* Full-screen rising smoke, shown behind the shisha slide */
