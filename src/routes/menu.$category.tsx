@@ -32,11 +32,13 @@ type Puff = { left: string; delay: string; duration: string; drift: string; gold
 
 // Big, slow smoke clouds that fill the whole screen behind the shisha slide.
 const PAGE_PUFFS: Puff[] = [
-  { left: "-8%", delay: "0s", duration: "17s", drift: "70px" },
-  { left: "20%", delay: "3.5s", duration: "20s", drift: "-60px", gold: true },
-  { left: "46%", delay: "1.5s", duration: "15s", drift: "80px" },
-  { left: "68%", delay: "5s", duration: "22s", drift: "-70px", gold: true },
-  { left: "86%", delay: "2.5s", duration: "18s", drift: "50px" },
+  { left: "-10%", delay: "0s", duration: "17s", drift: "70px" },
+  { left: "8%", delay: "4s", duration: "20s", drift: "-60px", gold: true },
+  { left: "26%", delay: "1.5s", duration: "15s", drift: "80px" },
+  { left: "42%", delay: "6s", duration: "22s", drift: "-70px" },
+  { left: "58%", delay: "2.5s", duration: "18s", drift: "60px", gold: true },
+  { left: "74%", delay: "8s", duration: "19s", drift: "-50px" },
+  { left: "88%", delay: "5s", duration: "16s", drift: "40px" },
 ];
 
 function PageSmoke() {
