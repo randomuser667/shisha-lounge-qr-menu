@@ -128,8 +128,8 @@ function CategorySlide() {
         <BackButton label={lang === "hu" ? "Vissza az étlaphoz" : "Back to menu"} />
       </div>
 
-      <footer className="mt-10 text-center text-xs text-muted-foreground">
-        <p className="inline-block rounded-full bg-background/70 px-3 py-1 backdrop-blur">
+      <footer className="mt-10 text-center text-xs text-foreground/80">
+        <p className="inline-block rounded-full bg-background/85 px-3 py-1 backdrop-blur">
           {lang === "hu" ? "Az árak forintban, az ÁFA-t tartalmazzák." : "Prices in HUF, VAT included."}
         </p>
       </footer>
