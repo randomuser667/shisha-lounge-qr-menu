@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QrRouteImport } from './routes/qr'
+import { Route as MenuCategoryRouteImport } from './routes/menu.$category'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const QrRoute = QrRouteImport.update({
   path: '/qr',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MenuCategoryRoute = MenuCategoryRouteImport.update({
+  id: '/menu/$category',
+  path: '/menu/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/qr': typeof QrRoute
+  '/menu/$category': typeof MenuCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/qr': typeof QrRoute
+  '/menu/$category': typeof MenuCategoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/qr': typeof QrRoute
+  '/menu/$category': typeof MenuCategoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/qr'
+  fullPaths: '/' | '/qr' | '/menu/$category'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/qr'
-  id: '__root__' | '/' | '/qr'
+  to: '/' | '/qr' | '/menu/$category'
+  id: '__root__' | '/' | '/qr' | '/menu/$category'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   QrRoute: typeof QrRoute
+  MenuCategoryRoute: typeof MenuCategoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/menu/$category': {
+      id: '/menu/$category'
+      path: '/menu/$category'
+      fullPath: '/menu/$category'
+      preLoaderRoute: typeof MenuCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   QrRoute: QrRoute,
+  MenuCategoryRoute: MenuCategoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

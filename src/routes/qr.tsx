@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 
@@ -28,9 +28,14 @@ function QrPage() {
         {url && <QRCodeSVG value={url} size={240} bgColor="transparent" fgColor="currentColor" className="text-background" />}
       </div>
       <p className="text-xs text-muted-foreground break-all">{url}</p>
-      <button onClick={() => window.print()} className="rounded-full bg-gold-gradient px-6 py-2 font-semibold text-primary-foreground">
-        Print
-      </button>
+      <div className="flex flex-wrap justify-center gap-3">
+        <button onClick={() => window.print()} className="rounded-full bg-gold-gradient px-6 py-2 font-semibold text-primary-foreground">
+          Print
+        </button>
+        <Link to="/" className="rounded-full border px-6 py-2 font-semibold text-muted-foreground transition hover:text-gold">
+          Open menu
+        </Link>
+      </div>
     </div>
   );
 }
