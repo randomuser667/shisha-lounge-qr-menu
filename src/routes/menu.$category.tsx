@@ -28,6 +28,39 @@ export const Route = createFileRoute("/menu/$category")({
   component: CategorySlide,
 });
 
+type Puff = { left: string; delay: string; duration: string; drift: string; gold?: boolean };
+
+// Big, slow smoke clouds that fill the whole screen behind the shisha slide.
+const PAGE_PUFFS: Puff[] = [
+  { left: "-8%", delay: "0s", duration: "17s", drift: "70px" },
+  { left: "20%", delay: "3.5s", duration: "20s", drift: "-60px", gold: true },
+  { left: "46%", delay: "1.5s", duration: "15s", drift: "80px" },
+  { left: "68%", delay: "5s", duration: "22s", drift: "-70px", gold: true },
+  { left: "86%", delay: "2.5s", duration: "18s", drift: "50px" },
+];
+
+function PageSmoke() {
+  return (
+    <span className="page-smoke" aria-hidden="true">
+      <span className="page-smoke__base" />
+      {PAGE_PUFFS.map((p) => (
+        <span
+          key={p.left}
+          className={`page-smoke__puff${p.gold ? " page-smoke__puff--gold" : ""}`}
+          style={
+            {
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+              "--drift": p.drift,
+            } as React.CSSProperties
+          }
+        />
+      ))}
+    </span>
+  );
+}
+
 function BackButton({ label }: { label: string }) {
   return (
     <Link
@@ -59,6 +92,8 @@ function CategorySlide() {
 
   return (
     <div className="mx-auto max-w-xl px-5 pb-16">
+      {cat.id === "shisha" && <PageSmoke />}
+
       <div className="sticky top-0 z-10 -mx-5 flex items-center justify-between gap-3 bg-background/85 px-5 py-3 backdrop-blur">
         <BackButton label={lang === "hu" ? "Vissza" : "Back"} />
         <LangToggle />

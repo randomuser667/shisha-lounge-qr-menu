@@ -16,21 +16,60 @@ export const Route = createFileRoute("/")({
   component: MenuOverview,
 });
 
-// Decorative smoke puffs that rise up inside the shisha card.
-const PUFFS = [
-  { left: "8%", delay: "0s", duration: "7s", drift: "18px", gold: false },
-  { left: "24%", delay: "1.5s", duration: "8s", drift: "-14px", gold: true },
-  { left: "40%", delay: "0.6s", duration: "6.5s", drift: "22px", gold: false },
-  { left: "56%", delay: "2.4s", duration: "8.5s", drift: "-18px", gold: true },
-  { left: "72%", delay: "1.1s", duration: "7.5s", drift: "12px", gold: false },
-  { left: "88%", delay: "3s", duration: "7s", drift: "-10px", gold: false },
-];
+type Puff = { left: string; delay: string; duration: string; drift: string; gold?: boolean };
 
-function SmokeLayer() {
+// Decorative smoke that rises up inside each category card — a different tint
+// and rhythm per category.
+const SMOKE: Record<string, { variant: string; puffs: Puff[] }> = {
+  shisha: {
+    variant: "plum",
+    puffs: [
+      { left: "8%", delay: "0s", duration: "7s", drift: "18px" },
+      { left: "24%", delay: "1.5s", duration: "8s", drift: "-14px", gold: true },
+      { left: "40%", delay: "0.6s", duration: "6.5s", drift: "22px" },
+      { left: "56%", delay: "2.4s", duration: "8.5s", drift: "-18px", gold: true },
+      { left: "72%", delay: "1.1s", duration: "7.5s", drift: "12px" },
+      { left: "88%", delay: "3s", duration: "7s", drift: "-10px" },
+    ],
+  },
+  cocktails: {
+    variant: "gold",
+    puffs: [
+      { left: "12%", delay: "0.4s", duration: "6s", drift: "-20px" },
+      { left: "30%", delay: "2s", duration: "7.5s", drift: "16px" },
+      { left: "50%", delay: "1.2s", duration: "6.8s", drift: "-24px" },
+      { left: "70%", delay: "2.8s", duration: "8s", drift: "18px" },
+      { left: "88%", delay: "0.9s", duration: "6.4s", drift: "-12px" },
+    ],
+  },
+  soft: {
+    variant: "cool",
+    puffs: [
+      { left: "6%", delay: "1s", duration: "9s", drift: "14px" },
+      { left: "26%", delay: "0.2s", duration: "7.8s", drift: "-18px" },
+      { left: "44%", delay: "2.6s", duration: "8.4s", drift: "20px" },
+      { left: "62%", delay: "1.7s", duration: "7.2s", drift: "-14px" },
+      { left: "80%", delay: "3.2s", duration: "9.5s", drift: "16px" },
+      { left: "94%", delay: "0.7s", duration: "8s", drift: "-8px" },
+    ],
+  },
+  hot: {
+    variant: "steam",
+    puffs: [
+      { left: "14%", delay: "0s", duration: "5.5s", drift: "10px" },
+      { left: "34%", delay: "1.3s", duration: "6.2s", drift: "-8px" },
+      { left: "52%", delay: "0.5s", duration: "5s", drift: "12px" },
+      { left: "70%", delay: "2.1s", duration: "6.6s", drift: "-10px" },
+      { left: "86%", delay: "1.6s", duration: "5.8s", drift: "8px" },
+    ],
+  },
+};
+
+function SmokeLayer({ variant, puffs }: { variant: string; puffs: Puff[] }) {
   return (
-    <span className="card-smoke" aria-hidden="true">
+    <span className={`card-smoke card-smoke--${variant}`} aria-hidden="true">
       <span className="card-smoke__base" />
-      {PUFFS.map((p) => (
+      {puffs.map((p) => (
         <span
           key={p.left}
           className={`card-smoke__puff${p.gold ? " card-smoke__puff--gold" : ""}`}
@@ -65,6 +104,7 @@ function MenuOverview() {
       <ul className="mt-6 space-y-3">
         {menu.map((c) => {
           const from = Math.min(...c.items.map((i) => i.price));
+          const smoke = SMOKE[c.id];
           return (
             <li key={c.id}>
               <Link
@@ -72,7 +112,7 @@ function MenuOverview() {
                 params={{ category: c.id }}
                 className="group relative flex items-center justify-between gap-4 overflow-hidden rounded-xl border bg-card/70 p-5 transition active:scale-[0.99] hover:border-gold/50 hover:shadow-glow"
               >
-                {c.id === "shisha" && <SmokeLayer />}
+                {smoke && <SmokeLayer variant={smoke.variant} puffs={smoke.puffs} />}
                 <span className="relative z-10">
                   <span className="block font-display text-2xl">{c.title[lang]}</span>
                   <span className="mt-1 block text-xs text-muted-foreground">
