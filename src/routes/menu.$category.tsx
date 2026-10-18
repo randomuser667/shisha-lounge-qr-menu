@@ -52,7 +52,9 @@ function BackButton({ label }: { label: string }) {
 }
 
 function CategorySlide() {
-  const cat = Route.useLoaderData();
+  const { category } = Route.useParams();
+  // The loader already 404s unknown slugs, so this lookup always hits.
+  const cat = menu.find((c) => c.id === category)!;
   const { lang } = useLang();
 
   return (
