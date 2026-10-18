@@ -18,8 +18,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [lang, setLang] = useState<Lang>("hu");
-  const [active, setActive] = useState(menu[0].id);
-  const cat = menu.find((c) => c.id === active)!;
+  const [active, setActive] = useState("shisha");
+  const cat = menu.find((c) => c.id === active) ?? menu[0]!;
 
   return (
     <div className="mx-auto max-w-xl px-5 pb-16">
