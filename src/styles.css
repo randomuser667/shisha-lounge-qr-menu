@@ -242,8 +242,8 @@
   height: 96px;
   background: radial-gradient(
     ellipse at 50% 78%,
-    oklch(0.93 0.03 290 / 66%),
-    oklch(0.78 0.05 300 / 30%) 46%,
+    oklch(0.94 0.05 245 / 70%),
+    oklch(0.8 0.07 255 / 32%) 46%,
     transparent 76%
   );
 }
@@ -258,8 +258,8 @@
   filter: blur(10px);
   background: radial-gradient(
     ellipse at 50% 78%,
-    oklch(0.96 0.02 305 / 76%),
-    oklch(0.88 0.03 305 / 34%) 46%,
+    oklch(0.98 0.008 305 / 82%),
+    oklch(0.92 0.012 305 / 38%) 46%,
     transparent 76%
   );
 }
