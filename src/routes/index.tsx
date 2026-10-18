@@ -141,9 +141,24 @@ function MenuOverview() {
         })}
       </ul>
 
+      <Link
+        to="/policy"
+        className="mt-6 block rounded-xl border border-gold/40 bg-card/70 p-4 text-center font-display text-lg text-gold transition hover:shadow-glow"
+      >
+        {lang === "hu" ? "Vízipipa szabályzat" : "Shisha policy"}
+      </Link>
+
       <footer className="mt-14 text-center text-xs text-muted-foreground">
         <p>{lang === "hu" ? "Az árak forintban, az ÁFA-t tartalmazzák." : "Prices in HUF, VAT included."}</p>
       </footer>
+
+      <Link
+        to="/qr"
+        aria-label="QR code"
+        className="fixed bottom-4 right-4 z-30 rounded-full border border-gold/50 bg-background px-4 py-2 text-xs font-semibold text-gold shadow-glow"
+      >
+        QR
+      </Link>
     </div>
   );
 }
