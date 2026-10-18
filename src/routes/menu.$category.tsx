@@ -129,7 +129,7 @@ function CategorySlide() {
       </div>
 
       <footer className="mt-10 text-center text-xs text-foreground/80">
-        <p className="inline-block rounded-full bg-background/85 px-3 py-1 backdrop-blur">
+        <p className="inline-block rounded-full bg-background px-3 py-1">
           {lang === "hu" ? "Az árak forintban, az ÁFA-t tartalmazzák." : "Prices in HUF, VAT included."}
         </p>
       </footer>
