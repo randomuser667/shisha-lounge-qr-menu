@@ -39,11 +39,16 @@ export const menu: Category[] = [
   },
   {
     id: "hot",
-    title: { hu: "Forró italok", en: "Hot drinks" },
+    title: { hu: "Forró italok és harapnivalók", en: "Hot drinks & snacks" },
     items: [
       { name: { hu: "Marokkói mentatea", en: "Moroccan mint tea" }, price: 1600 },
       { name: { hu: "Espresso", en: "Espresso" }, price: 800 },
       { name: { hu: "Cappuccino", en: "Cappuccino" }, price: 1100 },
+      { name: { hu: "Csirkeszárnyak", en: "Chicken wings" }, desc: { hu: "6 db, BBQ vagy csípős", en: "6 pcs, BBQ or spicy" }, price: 3200 },
+      { name: { hu: "Sajtos nachók", en: "Cheesy nachos" }, desc: { hu: "Guacamolével és joghurtos mártással", en: "With guacamole and yogurt dip" }, price: 2800 },
+      { name: { hu: "Krumplis hasábok", en: "French fries" }, price: 1900 },
+      { name: { hu: "Sült camembert", en: "Fried camembert" }, desc: { hu: "Mézkalappal, pirítóssal", en: "With honey lid and toast" }, price: 3400 },
+      { name: { hu: "Sajttál", en: "Cheese plate" }, desc: { hu: "Válogatás szőlővel és dióval", en: "Selection with grapes and walnuts" }, price: 4900 },
     ],
   },
 ];

@@ -160,6 +160,68 @@
   }
 }
 
+/* Rising smoke behind a menu card — used on the shisha row */
+.card-smoke {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.card-smoke__puff {
+  position: absolute;
+  bottom: -78px;
+  width: 54px;
+  height: 104px;
+  border-radius: 50% 50% 46% 54% / 62% 62% 38% 38%;
+  opacity: 0;
+  filter: blur(13px);
+  will-change: transform, opacity;
+  background: radial-gradient(
+    ellipse at 50% 78%,
+    oklch(0.93 0.03 305 / 55%),
+    oklch(0.8 0.05 305 / 22%) 46%,
+    transparent 76%
+  );
+  animation: card-smoke-rise 7s ease-in infinite;
+}
+
+.card-smoke__puff--gold {
+  background: radial-gradient(
+    ellipse at 50% 78%,
+    oklch(0.86 0.11 85 / 38%),
+    oklch(0.75 0.1 85 / 14%) 46%,
+    transparent 76%
+  );
+}
+
+/* faint haze where the plume leaves the base of the card */
+.card-smoke__base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -18px;
+  height: 60px;
+  filter: blur(12px);
+  background: radial-gradient(ellipse at 50% 100%, oklch(0.9 0.04 305 / 34%), transparent 72%);
+}
+
+@keyframes card-smoke-rise {
+  0%   { transform: translate3d(0, 0, 0) scale(0.35) rotate(0deg); opacity: 0; }
+  14%  { opacity: 0.9; }
+  45%  { transform: translate3d(calc(var(--drift, 12px) * -0.5), -58px, 0) scale(1.15) rotate(-7deg); opacity: 0.6; }
+  75%  { opacity: 0.32; }
+  100% { transform: translate3d(var(--drift, 12px), -165px, 0) scale(2.4) rotate(9deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-smoke__puff {
+    animation: none;
+    opacity: 0.14;
+    transform: translate3d(0, -30%, 0) scale(1.2);
+  }
+}
+
 @utility text-gold-gradient {
   background: var(--gradient-gold);
   -webkit-background-clip: text;
