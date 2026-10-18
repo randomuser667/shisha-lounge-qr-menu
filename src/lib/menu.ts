@@ -48,4 +48,7 @@ export const menu: Category[] = [
   },
 ];
 
-export const formatPrice = (n: number) => `${n.toLocaleString("hu-HU")} Ft`;
+// Group thousands with a non-breaking space by hand: some browsers have no
+// hu-HU locale data and would otherwise render "5500 Ft".
+export const formatPrice = (n: number) =>
+  `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0")} Ft`;
