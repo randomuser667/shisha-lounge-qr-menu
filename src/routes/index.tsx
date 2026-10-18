@@ -18,16 +18,18 @@ export const Route = createFileRoute("/")({
 
 // Decorative smoke puffs that rise up inside the shisha card.
 const PUFFS = [
-  { left: "10%", delay: "0s", duration: "6.5s", drift: "16px", gold: false },
-  { left: "28%", delay: "1.4s", duration: "7.5s", drift: "-12px", gold: true },
-  { left: "46%", delay: "0.6s", duration: "6s", drift: "20px", gold: false },
-  { left: "64%", delay: "2.2s", duration: "8s", drift: "-16px", gold: true },
-  { left: "82%", delay: "1.1s", duration: "7s", drift: "10px", gold: false },
+  { left: "8%", delay: "0s", duration: "7s", drift: "18px", gold: false },
+  { left: "24%", delay: "1.5s", duration: "8s", drift: "-14px", gold: true },
+  { left: "40%", delay: "0.6s", duration: "6.5s", drift: "22px", gold: false },
+  { left: "56%", delay: "2.4s", duration: "8.5s", drift: "-18px", gold: true },
+  { left: "72%", delay: "1.1s", duration: "7.5s", drift: "12px", gold: false },
+  { left: "88%", delay: "3s", duration: "7s", drift: "-10px", gold: false },
 ];
 
 function SmokeLayer() {
   return (
     <span className="card-smoke" aria-hidden="true">
+      <span className="card-smoke__base" />
       {PUFFS.map((p) => (
         <span
           key={p.left}
