@@ -75,6 +75,91 @@
   }
 }
 
+/* Animated wallpaper: drifting smoke clouds + floating embers, behind all content */
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wallpaper__smoke {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.wallpaper__smoke--plum {
+  width: 70vmax;
+  height: 70vmax;
+  background: radial-gradient(circle, oklch(0.45 0.2 305 / 55%), transparent 65%);
+  top: -25vmax;
+  left: -20vmax;
+  animation: wallpaper-drift-1 26s ease-in-out infinite alternate;
+}
+
+.wallpaper__smoke--gold {
+  width: 55vmax;
+  height: 55vmax;
+  background: radial-gradient(circle, oklch(0.7 0.14 75 / 22%), transparent 65%);
+  bottom: -22vmax;
+  right: -18vmax;
+  animation: wallpaper-drift-2 32s ease-in-out infinite alternate;
+}
+
+.wallpaper__smoke--plum2 {
+  width: 45vmax;
+  height: 45vmax;
+  background: radial-gradient(circle, oklch(0.35 0.16 320 / 45%), transparent 65%);
+  bottom: -15vmax;
+  left: 20vmax;
+  animation: wallpaper-drift-3 38s ease-in-out infinite alternate;
+}
+
+.wallpaper__ember {
+  position: absolute;
+  bottom: -12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: oklch(0.85 0.14 85);
+  box-shadow: 0 0 8px oklch(0.8 0.13 85 / 80%);
+  opacity: 0;
+  animation: wallpaper-rise 12s linear infinite;
+}
+
+@keyframes wallpaper-drift-1 {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(14vmax, 10vmax, 0) scale(1.15); }
+}
+
+@keyframes wallpaper-drift-2 {
+  from { transform: translate3d(0, 0, 0) scale(1.1); }
+  to   { transform: translate3d(-12vmax, -9vmax, 0) scale(0.95); }
+}
+
+@keyframes wallpaper-drift-3 {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(10vmax, -12vmax, 0); }
+}
+
+@keyframes wallpaper-rise {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  10%  { opacity: 0.7; }
+  85%  { opacity: 0.4; }
+  100% { transform: translate3d(var(--drift, 6vmax), -105vh, 0); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper__smoke,
+  .wallpaper__ember {
+    animation: none;
+  }
+}
+
 @utility text-gold-gradient {
   background: var(--gradient-gold);
   -webkit-background-clip: text;

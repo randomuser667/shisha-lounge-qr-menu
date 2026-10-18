@@ -106,6 +106,23 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <div className="wallpaper" aria-hidden="true">
+          <div className="wallpaper__smoke wallpaper__smoke--plum" />
+          <div className="wallpaper__smoke wallpaper__smoke--gold" />
+          <div className="wallpaper__smoke wallpaper__smoke--plum2" />
+          {Array.from({ length: 9 }, (_, i) => (
+            <span
+              key={i}
+              className="wallpaper__ember"
+              style={{
+                left: `${8 + (i * 11) % 86}%`,
+                animationDelay: `${(i * 1.7) % 12}s`,
+                animationDuration: `${10 + (i * 1.3) % 6}s`,
+                ["--drift" as string]: `${(i % 2 === 0 ? 1 : -1) * (4 + (i * 2) % 8)}vmax`,
+              }}
+            />
+          ))}
+        </div>
         {children}
         <Scripts />
       </body>
