@@ -104,7 +104,7 @@ function MenuOverview() {
       <ul className="mt-6 space-y-3">
         {menu.map((c) => {
           const from = Math.min(...c.items.map((i) => i.price));
-           const smoke = SMOKE[c.id] ?? SMOKE.cocktails;
+           const smoke = SMOKE[c.id] ?? SMOKE["cocktails"];
           return (
             <li key={c.id}>
               <Link
@@ -113,7 +113,7 @@ function MenuOverview() {
                 className="group relative flex items-center justify-between gap-4 overflow-hidden rounded-xl border bg-card/70 p-5 transition active:scale-[0.99] hover:border-gold/50 hover:shadow-glow"
               >
                 {smoke && <SmokeLayer variant={smoke.variant} puffs={smoke.puffs} />}
-                <span className="relative z-10">
+                 <span className="relative z-10 min-w-0 break-words">
                   <span className="block font-display text-2xl">{c.title[lang]}</span>
                   <span className="mt-1 block text-xs text-muted-foreground">
                     {c.items.length} {lang === "hu" ? "tétel" : "items"}

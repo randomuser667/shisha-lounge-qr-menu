@@ -89,8 +89,10 @@ function BackButton({ label }: { label: string }) {
 }
 
 function CategorySlide() {
-  const cat = Route.useLoaderData();
+  const { category } = Route.useParams();
+  const cat = menu.find((entry) => entry.id === category);
   const { lang } = useLang();
+  if (!cat) throw notFound();
 
   return (
     <div className="mx-auto max-w-xl px-5 pb-16">
