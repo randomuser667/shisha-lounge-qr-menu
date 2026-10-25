@@ -8,14 +8,27 @@ describe("Guest menu options", () => {
     expect(deals?.items.some((item) => item.desc?.en === "2 × 500 ml draught beers + a bowl of popcorn")).toBe(true);
   });
 
-  it("includes vodka with Red Bull, bottle mixers, and snack sides", () => {
-    const bottles = menu.find((category) => category.id === "bottles");
-    const names = bottles?.items.map((item) => item.name.en);
-    expect(names).toEqual(expect.arrayContaining(["Vodka Party Set", "Vodka Red Bull", "Extra Red Bull", "Extra tonic", "Cheesy nachos", "Popcorn", "French fries"]));
+  it("offers bottle service with vodka and Red Bull, mixers, and snack sides inside deals", () => {
+    const deals = menu.find((category) => category.id === "deals");
+    const names = deals?.items.map((item) => item.name.en);
+    expect(names).toEqual(expect.arrayContaining(["Vodka Party Set", "Vodka Red Bull", "Extra Red Bull", "Extra tonic", "Cheesy nachos", "Popcorn"]));
+  });
+
+  it("never lists fries anywhere on the menu", () => {
+    const all = menu.flatMap((category) => category.items);
+    expect(all.some((item) => item.name.en === "French fries")).toBe(false);
+    expect(all.some((item) => /fries/i.test(item.desc?.en ?? ""))).toBe(false);
+  });
+
+  it("keeps Hungarian names in English when no natural translation exists", () => {
+    const deals = menu.find((category) => category.id === "deals");
+    const hungarianNames = deals?.items.map((item) => item.name.hu) ?? [];
+    expect(hungarianNames).not.toContain("Rum kóla");
+    expect(hungarianNames).not.toContain("Whiskey kóla");
   });
 
   it("marks at least one most-ordered product in each section", () => {
-    expect(menu).toHaveLength(6);
+    expect(menu).toHaveLength(5);
     for (const category of menu) {
       expect(category.items.some((item) => item.mostOrdered), category.id).toBe(true);
     }
