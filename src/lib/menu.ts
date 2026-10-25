@@ -50,6 +50,26 @@ export const menu: Category[] = [
     ],
   },
   {
+    id: "deals",
+    title: { hu: "Akciók és bottle service", en: "Deals & bottle service" },
+    items: [
+      { name: { hu: "Match Day MVP", en: "Match Day MVP" }, desc: { hu: "2 × 0,5 l csapolt sör + nachos", en: "2 × 500 ml draught beers + nachos" }, price: 4900, mostOrdered: true, group: { hu: "Akciós csomagok", en: "Deals" } },
+      { name: { hu: "Pop & Cheers", en: "Pop & Cheers" }, desc: { hu: "2 × 0,5 l csapolt sör + egy tál popcorn", en: "2 × 500 ml draught beers + a bowl of popcorn" }, price: 3500 },
+      { name: { hu: "Wing Squad", en: "Wing Squad" }, desc: { hu: "4 × 0,5 l csapolt sör + csípős nachos", en: "4 × 500 ml draught beers + spicy nachos" }, price: 8900 },
+      { name: { hu: "Golden Hour Duo", en: "Golden Hour Duo" }, desc: { hu: "2 Aperol Spritz + nachos", en: "2 Aperol Spritz + nachos" }, price: 7500 },
+      { name: { hu: "Zero Proof, Full Vibe", en: "Zero Proof, Full Vibe" }, desc: { hu: "2 Virgin Mojito + egy tál popcorn · alkoholmentes", en: "2 Virgin Mojito + a bowl of popcorn · alcohol-free" }, price: 4300 },
+      { name: { hu: "Vodka Party Set", en: "Vodka Party Set" }, desc: { hu: "0,7 l vodka + 4 × 250 ml Red Bull + jég és lime", en: "700 ml vodka + 4 × 250 ml Red Bull + ice and lime" }, price: 24900, mostOrdered: true, group: { hu: "Palackok és mixerek", en: "Bottles & mixers" } },
+      { name: { hu: "Gin & Tonic Set", en: "Gin & Tonic Set" }, desc: { hu: "0,7 l gin + 4 × 200 ml tonik + jég és citrusok", en: "700 ml gin + 4 × 200 ml tonic + ice and citrus" }, price: 23900 },
+      { name: { hu: "Rum & Cola Set", en: "Rum & Cola Set" }, desc: { hu: "0,7 l fehér rum + 4 × 250 ml Coca-Cola + jég és lime", en: "700 ml white rum + 4 × 250 ml Coca-Cola + ice and lime" }, price: 22900 },
+      { name: { hu: "Whiskey & Cola Set", en: "Whiskey & Cola Set" }, desc: { hu: "0,7 l bourbon whiskey + 4 × 250 ml Coca-Cola + jég", en: "700 ml bourbon whiskey + 4 × 250 ml Coca-Cola + ice" }, price: 26900 },
+      { name: { hu: "Tequila Crew Set", en: "Tequila Crew Set" }, desc: { hu: "0,7 l blanco tequila + lime, só + 1 l narancslé", en: "700 ml blanco tequila + lime, salt + 1 litre orange juice" }, price: 24900 },
+      { name: { hu: "Extra Red Bull", en: "Extra Red Bull" }, desc: { hu: "250 ml", en: "250 ml" }, price: 1300, group: { hu: "Extra mixerek", en: "Extra mixers" } },
+      { name: { hu: "Extra Coca-Cola", en: "Extra Coca-Cola" }, desc: { hu: "250 ml", en: "250 ml" }, price: 900 },
+      { name: { hu: "Extra tonic", en: "Extra tonic" }, desc: { hu: "200 ml", en: "200 ml" }, price: 900 },
+      { name: { hu: "Narancslé", en: "Orange juice" }, desc: { hu: "1 l kancsó", en: "1 litre jug" }, price: 2500 },
+    ],
+  },
+  {
     id: "soft",
     title: { hu: "Üdítők", en: "Soft drinks" },
     items: [
