@@ -1,7 +1,7 @@
 export type Lang = "hu" | "en";
 type T = { hu: string; en: string };
 
-export type MenuItem = { name: T; desc?: T; price: number };
+export type MenuItem = { name: T; desc?: T; price: number; mostOrdered?: boolean; group?: T };
 export type Category = { id: string; title: T; items: MenuItem[] };
 
 // Sample menu — replace with the real items and prices.
@@ -10,7 +10,7 @@ export const menu: Category[] = [
     id: "shisha",
     title: { hu: "Vízipipa", en: "Shisha" },
     items: [
-      { name: { hu: "Dupla alma", en: "Double Apple" }, desc: { hu: "Klasszikus ánizsos alma", en: "Classic aniseed apple" }, price: 5500 },
+      { name: { hu: "Dupla alma", en: "Double Apple" }, desc: { hu: "Klasszikus ánizsos alma", en: "Classic aniseed apple" }, price: 5500, mostOrdered: true },
       { name: { hu: "Görögdinnye menta", en: "Watermelon Mint" }, desc: { hu: "Friss és hűsítő", en: "Fresh and cooling" }, price: 5500 },
       { name: { hu: "Kék áfonya", en: "Blueberry" }, desc: { hu: "Édes erdei gyümölcs", en: "Sweet forest berry" }, price: 5500 },
       { name: { hu: "Hashtag Signature", en: "Hashtag Signature" }, desc: { hu: "A ház titkos keveréke", en: "Our secret house blend" }, price: 7000 },
@@ -21,7 +21,7 @@ export const menu: Category[] = [
     id: "cocktails",
     title: { hu: "Koktélok", en: "Cocktails" },
     items: [
-      { name: { hu: "Mojito", en: "Mojito" }, desc: { hu: "Fehér rum, lime, menta, nádcukor, szóda", en: "White rum, lime, mint, cane sugar, soda" }, price: 2900 },
+      { name: { hu: "Mojito", en: "Mojito" }, desc: { hu: "Fehér rum, lime, menta, nádcukor, szóda", en: "White rum, lime, mint, cane sugar, soda" }, price: 2900, mostOrdered: true },
       { name: { hu: "Pornstar Martini", en: "Pornstar Martini" }, desc: { hu: "Vanília vodka, maracuja, lime, prosecco", en: "Vanilla vodka, passion fruit, lime, prosecco" }, price: 3400 },
       { name: { hu: "Aperol Spritz", en: "Aperol Spritz" }, desc: { hu: "Aperol, prosecco, szóda, narancs", en: "Aperol, prosecco, soda, orange" }, price: 2900 },
       { name: { hu: "Purple Rain", en: "Purple Rain" }, desc: { hu: "Vodka, kék curaçao, áfonyalé, grenadin", en: "Vodka, blue curaçao, cranberry, grenadine" }, price: 3200 },
@@ -53,7 +53,7 @@ export const menu: Category[] = [
     id: "soft",
     title: { hu: "Üdítők", en: "Soft drinks" },
     items: [
-      { name: { hu: "Házi limonádé", en: "Homemade lemonade" }, price: 1500 },
+      { name: { hu: "Házi limonádé", en: "Homemade lemonade" }, price: 1500, mostOrdered: true },
       { name: { hu: "Coca-Cola", en: "Coca-Cola" }, price: 900 },
       { name: { hu: "Red Bull", en: "Red Bull" }, price: 1300 },
       { name: { hu: "Ásványvíz", en: "Mineral water" }, price: 700 },
@@ -61,16 +61,49 @@ export const menu: Category[] = [
   },
   {
     id: "hot",
-    title: { hu: "Forró italok és harapnivalók", en: "Hot drinks & snacks" },
+    title: { hu: "Forró italok és snacks", en: "Hot drinks & snacks" },
     items: [
       { name: { hu: "Marokkói mentatea", en: "Moroccan mint tea" }, price: 1600 },
       { name: { hu: "Espresso", en: "Espresso" }, price: 800 },
       { name: { hu: "Cappuccino", en: "Cappuccino" }, price: 1100 },
       { name: { hu: "Csirkeszárnyak", en: "Chicken wings" }, desc: { hu: "6 db, BBQ vagy csípős", en: "6 pcs, BBQ or spicy" }, price: 3200 },
-      { name: { hu: "Sajtos nachók", en: "Cheesy nachos" }, desc: { hu: "Guacamolével és joghurtos mártással", en: "With guacamole and yogurt dip" }, price: 2800 },
+      { name: { hu: "Sajtos nachók", en: "Cheesy nachos" }, desc: { hu: "Guacamolével és joghurtos mártással", en: "With guacamole and yogurt dip" }, price: 2800, mostOrdered: true },
       { name: { hu: "Krumplis hasábok", en: "French fries" }, price: 1900 },
       { name: { hu: "Sült camembert", en: "Fried camembert" }, desc: { hu: "Mézkalappal, pirítóssal", en: "With honey lid and toast" }, price: 3400 },
       { name: { hu: "Sajttál", en: "Cheese plate" }, desc: { hu: "Válogatás szőlővel és dióval", en: "Selection with grapes and walnuts" }, price: 4900 },
+      { name: { hu: "Popcorn", en: "Popcorn" }, desc: { hu: "Egy tál sós popcorn", en: "A bowl of salted popcorn" }, price: 1200 },
+    ],
+  },
+  {
+    id: "deals",
+    title: { hu: "Akciós csomagok", en: "Deals" },
+    items: [
+      { name: { hu: "Match Day MVP", en: "Match Day MVP" }, desc: { hu: "2 × 0,5 l csapolt sör + sajtos nachók", en: "2 × 500 ml draught beers + cheesy nachos" }, price: 4900, mostOrdered: true },
+      { name: { hu: "Pop & Cheers", en: "Pop & Cheers" }, desc: { hu: "2 × 0,5 l csapolt sör + egy tál popcorn", en: "2 × 500 ml draught beers + a bowl of popcorn" }, price: 3500 },
+      { name: { hu: "Wing Squad", en: "Wing Squad" }, desc: { hu: "4 × 0,5 l csapolt sör + 6 csirkeszárny + sült krumpli", en: "4 × 500 ml draught beers + 6 chicken wings + fries" }, price: 8900 },
+      { name: { hu: "Golden Hour Duo", en: "Golden Hour Duo" }, desc: { hu: "2 Aperol Spritz + sajtos nachók", en: "2 Aperol Spritz + cheesy nachos" }, price: 7500 },
+      { name: { hu: "Zero Proof, Full Vibe", en: "Zero Proof, Full Vibe" }, desc: { hu: "2 Virgin Mojito + egy tál popcorn · alkoholmentes", en: "2 Virgin Mojito + a bowl of popcorn · alcohol-free" }, price: 4300 },
+    ],
+  },
+  {
+    id: "bottles",
+    title: { hu: "Palackszerviz", en: "Bottle service" },
+    items: [
+      { name: { hu: "Vodka Party Set", en: "Vodka Party Set" }, desc: { hu: "0,7 l vodka + 4 × 250 ml Red Bull + jég és lime", en: "700 ml vodka + 4 × 250 ml Red Bull + ice and lime" }, price: 24900, mostOrdered: true, group: { hu: "Palackok és mixerek", en: "Bottles & mixers" } },
+      { name: { hu: "Gin & Tonic Set", en: "Gin & Tonic Set" }, desc: { hu: "0,7 l gin + 4 × 200 ml tonik + jég és citrusok", en: "700 ml gin + 4 × 200 ml tonic + ice and citrus" }, price: 23900 },
+      { name: { hu: "Rum & Cola Set", en: "Rum & Cola Set" }, desc: { hu: "0,7 l fehér rum + 4 × 250 ml Coca-Cola + jég és lime", en: "700 ml white rum + 4 × 250 ml Coca-Cola + ice and lime" }, price: 22900 },
+      { name: { hu: "Whiskey & Cola Set", en: "Whiskey & Cola Set" }, desc: { hu: "0,7 l bourbon whiskey + 4 × 250 ml Coca-Cola + jég", en: "700 ml bourbon whiskey + 4 × 250 ml Coca-Cola + ice" }, price: 26900 },
+      { name: { hu: "Tequila Crew Set", en: "Tequila Crew Set" }, desc: { hu: "0,7 l blanco tequila + lime, só + 1 l narancslé", en: "700 ml blanco tequila + lime, salt + 1 litre orange juice" }, price: 24900 },
+      { name: { hu: "Vodka Red Bull", en: "Vodka Red Bull" }, desc: { hu: "4 cl vodka + 250 ml Red Bull", en: "40 ml vodka + 250 ml Red Bull" }, price: 2900, mostOrdered: true, group: { hu: "Club kedvencek · pohárral", en: "Club classics · by the glass" } },
+      { name: { hu: "Rum kóla", en: "Rum & Cola" }, desc: { hu: "4 cl fehér rum + 250 ml Coca-Cola + lime", en: "40 ml white rum + 250 ml Coca-Cola + lime" }, price: 2500 },
+      { name: { hu: "Whiskey kóla", en: "Whiskey & Cola" }, desc: { hu: "4 cl bourbon whiskey + 250 ml Coca-Cola", en: "40 ml bourbon whiskey + 250 ml Coca-Cola" }, price: 2700 },
+      { name: { hu: "Extra Red Bull", en: "Extra Red Bull" }, desc: { hu: "250 ml", en: "250 ml" }, price: 1300, group: { hu: "Extra mixerek és snacks", en: "Extra mixers & snacks" } },
+      { name: { hu: "Extra Coca-Cola", en: "Extra Coca-Cola" }, desc: { hu: "250 ml", en: "250 ml" }, price: 900 },
+      { name: { hu: "Extra tonik", en: "Extra tonic" }, desc: { hu: "200 ml", en: "200 ml" }, price: 900 },
+      { name: { hu: "Narancslé", en: "Orange juice" }, desc: { hu: "1 l kancsó", en: "1 litre jug" }, price: 2500 },
+      { name: { hu: "Sajtos nachók", en: "Cheesy nachos" }, desc: { hu: "Guacamolével és joghurtos mártással", en: "With guacamole and yogurt dip" }, price: 2800 },
+      { name: { hu: "Popcorn", en: "Popcorn" }, desc: { hu: "Egy tál sós popcorn", en: "A bowl of salted popcorn" }, price: 1200 },
+      { name: { hu: "Sült krumpli", en: "French fries" }, price: 1900 },
     ],
   },
 ];
