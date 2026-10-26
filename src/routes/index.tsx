@@ -103,7 +103,7 @@ function MenuOverview() {
 
       <ul className="mt-6 space-y-3">
         {menu.map((c) => {
-          const from = Math.min(...c.items.map((i) => i.price));
+          const from = Math.min(...c.items.flatMap((i) => (i.price == null ? [] : [i.price])));
            const smoke = SMOKE[c.id] ?? SMOKE["cocktails"];
           return (
             <li key={c.id}>

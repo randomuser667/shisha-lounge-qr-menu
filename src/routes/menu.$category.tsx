@@ -111,8 +111,8 @@ function CategorySlide() {
       </section>
 
       <ul className="space-y-3">
-         {cat.items.map((item) => (
-           <Fragment key={item.name.en}>
+         {cat.items.map((item, i) => (
+           <Fragment key={i}>
            {item.group && <li className="pt-5 pb-1"><h2 className="font-display text-lg text-gold">{item.group[lang]}</h2></li>}
           <li
             className="rounded-xl border bg-card/70 p-4 animate-in fade-in slide-in-from-bottom-2"
@@ -120,7 +120,7 @@ function CategorySlide() {
              {item.mostOrdered && <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-gold"><Star className="h-3.5 w-3.5 shrink-0 fill-current" aria-hidden="true" />{lang === "hu" ? "Legtöbbet rendelt" : "Most ordered"}</p>}
              <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                <h3 className="min-w-0 font-display text-lg break-words">{item.name[lang]}</h3>
-               <span className="shrink-0 whitespace-nowrap font-semibold text-gold">{formatPrice(item.price)}</span>
+               {item.price != null && <span className="shrink-0 whitespace-nowrap font-semibold text-gold">{formatPrice(item.price)}</span>}
             </div>
             {item.desc && <p className="mt-1 text-sm text-muted-foreground">{item.desc[lang]}</p>}
           </li>
