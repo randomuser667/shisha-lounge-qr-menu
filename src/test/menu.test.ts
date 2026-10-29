@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { menu } from "@/lib/menu";
 
-const cat = (id: string) => menu.find((c) => c.id === id)!;
+const cat = (id: string) => {
+  const category = menu.find((c) => c.id === id);
+  if (!category) throw new Error(`Missing category: ${id}`);
+  return category;
+};
 const names = (id: string) => cat(id).items.map((i) => i.name.hu);
 
 describe("Guest menu", () => {
@@ -42,7 +46,21 @@ describe("Guest menu", () => {
   it("has no Zero Proof deal", () => {
     expect(names("deals")).not.toContain("Zero Proof, Full Vibe");
   });
-  it("stars a most-ordered product in every section", () => {
-    for (const c of menu) expect(c.items.some((i) => i.mostOrdered), c.id).toBe(true);
+  it("has no bestseller metadata anywhere", () => {
+    expect(menu.flatMap((c) => c.items).filter((item) => "mostOrdered" in item)).toEqual([]);
+  });
+  it("removes unusual dessert and floral shisha blends while retaining lounge classics", () => {
+    const flavors = names("shisha");
+    for (const removed of ["English mix", "Jungle", "Eterna", "Prada", "Levander lemonade"]) {
+      expect(flavors).not.toContain(removed);
+    }
+    expect(flavors).toEqual(expect.arrayContaining(["Blue ice", "Grape mint", "Love66", "Ladykiller", "Melon"]));
+    expect(flavors).toHaveLength(37);
+  });
+  it("keeps all 21 cocktails in a continuous order with Mojito seventh", () => {
+    const cocktails = cat("cocktails").items.slice(0, -3);
+    expect(cocktails).toHaveLength(21);
+    expect(cocktails.slice(5, 8).map((item) => item.name.hu)).toEqual(["Fiero Tonic", "Mojito", "Mojito eper"]);
+    expect(cocktails.every((item) => item.name.hu.trim().length > 0)).toBe(true);
   });
 });
