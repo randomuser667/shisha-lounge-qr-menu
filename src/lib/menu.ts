@@ -56,7 +56,7 @@ export const menu: Category[] = [
   },
   {
     id: "cocktails",
-    title: { hu: "Koktélok", en: "Cocktails" },
+    title: { hu: "Koktélok és shotok", en: "Cocktails & shots" },
     items: [
       { name: { hu: "Aperol Spritz", en: "Aperol Spritz" }, desc: { hu: "6 cl Aperol + 1 dl prosecco, szóda, Angostura bitters", en: "6 cl Aperol + 1 dl prosecco, soda, Angostura bitters" }, price: 2290, mostOrdered: true },
       { name: { hu: "Hugo", en: "Hugo" }, desc: { hu: "lime, menta, 4 cl bodzaszirup, 1,5 dl prosecco + szóda", en: "lime, mint, 4 cl elderflower syrup, 1.5 dl prosecco + soda" }, price: 2290 },
@@ -79,6 +79,9 @@ export const menu: Category[] = [
       { name: { hu: "Tequila Sunrise", en: "Tequila Sunrise" }, desc: { hu: "2 cl grenadinszirup, 4 cl tequila, narancslé", en: "2 cl grenadine syrup, 4 cl tequila, orange juice" }, price: 2290 },
       { name: { hu: "Málna Sprite", en: "Raspberry Sprite" }, price: 2390 },
       { name: { hu: "Pornstar Martini", en: "Pornstar Martini" }, desc: { hu: "4 cl Absolut Vanilia, 4 cl ananászlé, 2 cl Passoa, 1 cl vaníliaszirup, fél proseccóval", en: "4 cl Absolut Vanilia, 4 cl pineapple juice, 2 cl Passoa, 1 cl vanilla syrup, with half a glass of prosecco" }, price: 2850 },
+      { name: { hu: "Speed shot", en: "Speed shot" }, desc: { hu: "10 db-os szett · 4 cl Kalinka vodka, 4 cl Bacardi, 4 cl grenadin, narancslé, Red Bull", en: "Set of 10 · 4 cl Kalinka vodka, 4 cl Bacardi, 4 cl grenadine, orange juice, Red Bull" }, price: 4400, group: { hu: "Shotok", en: "Shots" } },
+      { name: { hu: "Hashtag shot", en: "Hashtag shot" }, desc: { hu: "8 db-os szett · 5 cl Bombay, 2 cl citromlé, 2 cl triple sec, 2 cl áfonyaszirup, 2 cl kókusz, Sprite vagy tonic", en: "Set of 8 · 5 cl Bombay, 2 cl lemon juice, 2 cl triple sec, 2 cl cranberry syrup, 2 cl coconut, Sprite or tonic" }, price: 3000 },
+      { name: { hu: "Happy shot", en: "Happy shot" }, desc: { hu: "6 cl vodka, 2 cl Passoa, maracujaszirup, ananászlé", en: "6 cl vodka, 2 cl Passoa, passion fruit syrup, pineapple juice" }, price: 3450 },
     ],
   },
   {
@@ -89,7 +92,6 @@ export const menu: Category[] = [
       { name: { hu: "Pop & Cheers", en: "Pop & Cheers" }, desc: { hu: "2 × 0,5 l csapolt sör + egy tál popcorn", en: "2 × 500 ml draught beers + a bowl of popcorn" }, price: 3500 },
       { name: { hu: "Wing Squad", en: "Wing Squad" }, desc: { hu: "4 × 0,5 l csapolt sör + csípős nachos", en: "4 × 500 ml draught beers + spicy nachos" }, price: 8900 },
       { name: { hu: "Golden Hour Duo", en: "Golden Hour Duo" }, desc: { hu: "2 Aperol Spritz + nachos", en: "2 Aperol Spritz + nachos" }, price: 7500 },
-      { name: { hu: "Zero Proof, Full Vibe", en: "Zero Proof, Full Vibe" }, desc: { hu: "2 Virgin Mojito + egy tál popcorn · alkoholmentes", en: "2 Virgin Mojito + a bowl of popcorn · alcohol-free" }, price: 4300 },
       { name: { hu: "Vodka Party Set", en: "Vodka Party Set" }, desc: { hu: "0,7 l vodka + 4 × 250 ml Red Bull + jég és lime", en: "700 ml vodka + 4 × 250 ml Red Bull + ice and lime" }, price: 24900, mostOrdered: true, group: { hu: "Palackok és mixerek", en: "Bottles & mixers" } },
       { name: { hu: "Gin & Tonic Set", en: "Gin & Tonic Set" }, desc: { hu: "0,7 l gin + 4 × 200 ml tonik + jég és citrusok", en: "700 ml gin + 4 × 200 ml tonic + ice and citrus" }, price: 23900 },
       { name: { hu: "Rum & Cola Set", en: "Rum & Cola Set" }, desc: { hu: "0,7 l fehér rum + 4 × 250 ml Coca-Cola + jég és lime", en: "700 ml white rum + 4 × 250 ml Coca-Cola + ice and lime" }, price: 22900 },
