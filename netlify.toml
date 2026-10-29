@@ -1,0 +1,3 @@
+[build]
+  command = "node scripts/fetch-menu.mjs && npm run build"
+  publish = "dist"

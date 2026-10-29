@@ -88,7 +88,6 @@ try {
       desc: d['Leírás (HU)'] || '',
       descEn: d['Leírás (EN)'] || '',
       price: Number(d['Ár (Ft)']) || 0,
-      popular: (d['Legtöbbet rendelt'] || '').toLowerCase() === 'igen',
     }));
 
   const content = `// Automatikusan generált – ne szerkeszd kézzel!
