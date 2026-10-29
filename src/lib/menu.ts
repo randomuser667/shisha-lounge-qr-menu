@@ -1,269 +1,69 @@
-export type Lang = "hu" | "en";
-type T = { hu: string; en: string };
+import { menuData } from './menu-data';
 
-// price is optional: items without a known price show no price yet.
-export type MenuItem = { name: T; desc?: T; price?: number; group?: T };
-export type Category = { id: string; title: T; items: MenuItem[] };
+export type MenuItem = {
+  category: string;
+  groupHu: string;
+  groupEn: string;
+  name: string;
+  nameEn: string;
+  desc: string;
+  descEn: string;
+  price: number;
+  popular: boolean;
+};
 
-export const menu: Category[] = [
-  {
-    id: "shisha",
-    title: { hu: "Vízipipa", en: "Shisha" },
-    items: [
-      { name: { hu: "Blue ice", en: "Blue ice" }, desc: { hu: "áfonya jég", en: "áfonya jég" }, price: 6000, group: { hu: "Prémium · 6000 Ft", en: "Premium · 6000 Ft" } },
-      { name: { hu: "Grape mint", en: "Grape mint" }, desc: { hu: "szőlő, menta", en: "szőlő, menta" }, price: 6000 },
-      { name: { hu: "Queen", en: "Queen" }, desc: { hu: "trópusi gyümölcsök", en: "trópusi gyümölcsök" }, price: 6000 },
-      { name: { hu: "Tripleberry", en: "Tripleberry" }, desc: { hu: "erdeigyümölcs mix", en: "erdeigyümölcs mix" }, price: 6000 },
-      { name: { hu: "Love66", en: "Love66" }, desc: { hu: "görögdinnye, mézdinnye, maracuja, menta", en: "görögdinnye, mézdinnye, maracuja, menta" }, price: 6000 },
-      { name: { hu: "Ladykiller", en: "Ladykiller" }, desc: { hu: "mézdinnye, mangó, erdeigyümölcs, jég", en: "mézdinnye, mangó, erdeigyümölcs, jég" }, price: 6000 },
-      { name: { hu: "Citrus mix", en: "Citrus mix" }, desc: { hu: "citrusos gyümölcsök", en: "citrusos gyümölcsök" }, price: 6000 },
-      { name: { hu: "Ice lemon raspberry", en: "Ice lemon raspberry" }, desc: { hu: "málna, citrom, jég", en: "málna, citrom, jég" }, price: 6000 },
-      { name: { hu: "Purple candy", en: "Purple candy" }, desc: { hu: "szőlő, áfonya, jég", en: "szőlő, áfonya, jég" }, price: 6000 },
-      { name: { hu: "Love xx", en: "Love xx" }, desc: { hu: "görögdinnye, sárgadinnye, mangó", en: "görögdinnye, sárgadinnye, mangó" }, price: 6000 },
-      { name: { hu: "Ballon d'or", en: "Ballon d'or" }, desc: { hu: "eper, sárgadinnye", en: "eper, sárgadinnye" }, price: 6000 },
-      { name: { hu: "Exotic time", en: "Exotic time" }, desc: { hu: "őszibarack, maracuja, görögdinnye", en: "őszibarack, maracuja, görögdinnye" }, price: 6000 },
-      { name: { hu: "Word berry", en: "Word berry" }, desc: { hu: "áfonya, feketeribizli, eper, málna", en: "áfonya, feketeribizli, eper, málna" }, price: 6000 },
-      { name: { hu: "Miamor", en: "Miamor" }, desc: { hu: "ananász, banán, menta", en: "ananász, banán, menta" }, price: 6000 },
-      { name: { hu: "Rejavou", en: "Rejavou" }, desc: { hu: "vanília, sárgadinnye, karamella", en: "vanília, sárgadinnye, karamella" }, price: 6000 },
-      { name: { hu: "Chamelon", en: "Chamelon" }, desc: { hu: "papaja, ananász, mangó, jég", en: "papaja, ananász, mangó, jég" }, price: 6000 },
-      { name: { hu: "Hawaii", en: "Hawaii" }, desc: { hu: "mangó, ananász, menta", en: "mangó, ananász, menta" }, price: 6000 },
-      { name: { hu: "Ice cactus", en: "Ice cactus" }, desc: { hu: "kaktusz, jég", en: "kaktusz, jég" }, price: 6000 },
-      { name: { hu: "Okolom", en: "Okolom" }, desc: { hu: "bodzavirág, lime, menta", en: "bodzavirág, lime, menta" }, price: 6000 },
-      { name: { hu: "Arctic line", en: "Arctic line" }, desc: { hu: "lime, citrom, menta", en: "lime, citrom, menta" }, price: 6000 },
-      { name: { hu: "Louis Vuitton", en: "Louis Vuitton" }, desc: { hu: "erdeigyümölcs, menta", en: "erdeigyümölcs, menta" }, price: 6000 },
-      { name: { hu: "Okolom jojo berry", en: "Okolom jojo berry" }, desc: { hu: "citrom, bodza, feketeribizli, menta", en: "citrom, bodza, feketeribizli, menta" }, price: 6000 },
-      { name: { hu: "Tropic maracuja", en: "Tropic maracuja" }, desc: { hu: "maracuja", en: "maracuja" }, price: 7000, group: { hu: "Hardcore · 7000 Ft", en: "Hardcore · 7000 Ft" } },
-      { name: { hu: "Lime candy", en: "Lime candy" }, desc: { hu: "lime, cukorka", en: "lime, cukorka" }, price: 7000 },
-      { name: { hu: "Space jam", en: "Space jam" }, desc: { hu: "eper, kiwi, grapefruit", en: "eper, kiwi, grapefruit" }, price: 7000 },
-      { name: { hu: "Lemon tea", en: "Lemon tea" }, desc: { hu: "citromos tea", en: "citromos tea" }, price: 7000 },
-      { name: { hu: "Peach ice pear", en: "Peach ice pear" }, desc: { hu: "barack, körte, jég", en: "barack, körte, jég" }, price: 7000 },
-      { name: { hu: "Wildberry", en: "Wildberry" }, desc: { hu: "eper, málna, feketeribizli, áfonya", en: "eper, málna, feketeribizli, áfonya" }, price: 7000 },
-      { name: { hu: "Cherry lemonade", en: "Cherry lemonade" }, desc: { hu: "cseresznyés limonádé", en: "cseresznyés limonádé" }, price: 7000 },
-      { name: { hu: "Thailand shot", en: "Thailand shot" }, desc: { hu: "mangó, papaja, pomelo", en: "mangó, papaja, pomelo" }, price: 7000 },
-      { name: { hu: "Blackman", en: "Blackman" }, desc: { hu: "pink grapefruit, eper, málna", en: "pink grapefruit, eper, málna" }, price: 7000 },
-      { name: { hu: "Citrus mix", en: "Citrus mix" }, desc: { hu: "citrusos gyümölcsök", en: "citrusos gyümölcsök" }, price: 7000 },
-      { name: { hu: "Jelly cola", en: "Jelly cola" }, desc: { hu: "kóla", en: "kóla" }, price: 7000 },
-      { name: { hu: "Harmony", en: "Harmony" }, desc: { hu: "ananász, maracuja, citrom", en: "ananász, maracuja, citrom" }, price: 7000 },
-      { name: { hu: "Granate", en: "Granate" }, desc: { hu: "gránátalma", en: "gránátalma" }, price: 7000 },
-      { name: { hu: "Melon", en: "Melon" }, desc: { hu: "sárgadinnye", en: "sárgadinnye" }, price: 7000 },
-      { name: { hu: "Citrus jelly", en: "Citrus jelly" }, desc: { hu: "citrus", en: "citrus" }, price: 7000 },
-    ],
-  },
-  {
-    id: "cocktails",
-    title: { hu: "Koktélok és shotok", en: "Cocktails & shots" },
-    items: [
-      { name: { hu: "Aperol Spritz", en: "Aperol Spritz" }, desc: { hu: "6 cl Aperol + 1 dl prosecco, szóda, Angostura bitters", en: "6 cl Aperol + 1 dl prosecco, soda, Angostura bitters" }, price: 2290 },
-      { name: { hu: "Hugo", en: "Hugo" }, desc: { hu: "lime, menta, 4 cl bodzaszirup, 1,5 dl prosecco + szóda", en: "lime, mint, 4 cl elderflower syrup, 1.5 dl prosecco + soda" }, price: 2290 },
-      { name: { hu: "Cosmo", en: "Cosmo" }, desc: { hu: "2 cl citromlé, 4 cl vodka (Russian), 2 cl triple sec", en: "2 cl lemon juice, 4 cl vodka (Russian), 2 cl triple sec" }, price: 2490 },
-      { name: { hu: "Cuba Libre", en: "Cuba Libre" }, desc: { hu: "lime, 4 cl Bacardi Spiced + cola", en: "lime, 4 cl Bacardi Spiced + cola" }, price: 2290 },
-      { name: { hu: "Espresso Martini", en: "Espresso Martini" }, desc: { hu: "3 cl espresso, 2 cl cukor, 2 cl Kahlúa, 4 cl Kalinka vodka", en: "3 cl espresso, 2 cl sugar, 2 cl Kahlúa, 4 cl Kalinka vodka" }, price: 2590 },
-      { name: { hu: "Fiero Tonic", en: "Fiero Tonic" }, desc: { hu: "6 cl Martini Fiero + tonic", en: "6 cl Martini Fiero + tonic" }, price: 2000 },
-      { name: { hu: "Mojito", en: "Mojito" }, desc: { hu: "lime, menta, 4 cl Bacardi Carta Blanca, 2 cl cukor, szóda", en: "lime, mint, 4 cl Bacardi Carta Blanca, 2 cl sugar, soda" }, price: 2290 },
-      { name: { hu: "Mojito eper", en: "Strawberry Mojito" }, desc: { hu: "Mojito, csak cukor helyett eperszirup", en: "Same as Mojito, but strawberry syrup instead of sugar" }, price: 2290 },
-      { name: { hu: "Negroni", en: "Negroni" }, desc: { hu: "3 cl Bombay + 3 cl Campari + 3 cl Martini Rosso + Angostura bitters", en: "3 cl Bombay + 3 cl Campari + 3 cl Martini Rosso + Angostura bitters" }, price: 2690 },
-      { name: { hu: "Sex on the Beach", en: "Sex on the Beach" }, desc: { hu: "4 cl Kalinka vodka + 2 cl triple sec + narancslé + áfonyalé", en: "4 cl Kalinka vodka + 2 cl triple sec + orange juice + cranberry juice" }, price: 2490 },
-      { name: { hu: "Piña Colada", en: "Piña Colada" }, desc: { hu: "4 cl Bacardi + ananászlé, 3 cl kókuszszirup + 1 cl vanília, 4 cl tejszín", en: "4 cl Bacardi + pineapple juice, 3 cl coconut syrup + 1 cl vanilla, 4 cl cream" }, price: 2490 },
-      { name: { hu: "Mango Colada", en: "Mango Colada" }, desc: { hu: "4 cl Cîroc Mango, 3 cl mangópüré, 1 cl kókusz, 4 cl tejszín, ananászlé", en: "4 cl Cîroc Mango, 3 cl mango purée, 1 cl coconut, 4 cl cream, pineapple juice" }, price: 3200 },
-      { name: { hu: "Swimming Pool", en: "Swimming Pool" }, desc: { hu: "4 cl Kalinka vodka + 2 cl Blue Curaçao + 2 cl kókuszszirup, 2 cl tejszín + 6 cl ananászlé", en: "4 cl Kalinka vodka + 2 cl Blue Curaçao + 2 cl coconut syrup, 2 cl cream + 6 cl pineapple juice" }, price: 2490 },
-      { name: { hu: "Long Island", en: "Long Island" }, desc: { hu: "2 cl Kalinka vodka, 2 cl Olmeca tequila, 2 cl Bombay, 2 cl triple sec, 2 cl Bacardi, 2 cl citromlé, 2 cl cukorszirup, Coca-Cola", en: "2 cl Kalinka vodka, 2 cl Olmeca tequila, 2 cl Bombay, 2 cl triple sec, 2 cl Bacardi, 2 cl lemon juice, 2 cl sugar syrup, Coca-Cola" }, price: 3590 },
-      { name: { hu: "Pretty in Pink", en: "Pretty in Pink" }, desc: { hu: "2 cl citromlé, 3 cl eperszirup, 4 cl Kalinka vodka, eper vagy eperlé", en: "2 cl lemon juice, 3 cl strawberry syrup, 4 cl Kalinka vodka, strawberry or strawberry juice" }, price: 2690 },
-      { name: { hu: "Moscow Mule", en: "Moscow Mule" }, desc: { hu: "lime + 4 cl Russian vodka + gyömbérsör", en: "lime + 4 cl Russian vodka + ginger beer" }, price: 2890 },
-      { name: { hu: "Iceberg", en: "Iceberg" }, desc: { hu: "4 cl vodka + 2 cl Blue Curaçao + 2 cl citromlé + Sprite", en: "4 cl vodka + 2 cl Blue Curaçao + 2 cl lemon juice + Sprite" }, price: 2290 },
-      { name: { hu: "Mai Tai", en: "Mai Tai" }, desc: { hu: "4 cl Bacardi Spiced, 2 cl Bacardi Carta Blanca, 2 cl citromlé, 2 cl mandulaszirup, 2 cl cukor", en: "4 cl Bacardi Spiced, 2 cl Bacardi Carta Blanca, 2 cl lemon juice, 2 cl almond syrup, 2 cl sugar" }, price: 2690 },
-      { name: { hu: "Tequila Sunrise", en: "Tequila Sunrise" }, desc: { hu: "2 cl grenadinszirup, 4 cl tequila, narancslé", en: "2 cl grenadine syrup, 4 cl tequila, orange juice" }, price: 2290 },
-      { name: { hu: "Málna Sprite", en: "Raspberry Sprite" }, price: 2390 },
-      { name: { hu: "Pornstar Martini", en: "Pornstar Martini" }, desc: { hu: "4 cl Absolut Vanilia, 4 cl ananászlé, 2 cl Passoa, 1 cl vaníliaszirup, fél proseccóval", en: "4 cl Absolut Vanilia, 4 cl pineapple juice, 2 cl Passoa, 1 cl vanilla syrup, with half a glass of prosecco" }, price: 2850 },
-      { name: { hu: "Speed shot", en: "Speed shot" }, desc: { hu: "10 db-os szett · 4 cl Kalinka vodka, 4 cl Bacardi, 4 cl grenadin, narancslé, Red Bull", en: "Set of 10 · 4 cl Kalinka vodka, 4 cl Bacardi, 4 cl grenadine, orange juice, Red Bull" }, price: 4400, group: { hu: "Shotok", en: "Shots" } },
-      { name: { hu: "Hashtag shot", en: "Hashtag shot" }, desc: { hu: "8 db-os szett · 5 cl Bombay, 2 cl citromlé, 2 cl triple sec, 2 cl áfonyaszirup, 2 cl kókusz, Sprite vagy tonic", en: "Set of 8 · 5 cl Bombay, 2 cl lemon juice, 2 cl triple sec, 2 cl cranberry syrup, 2 cl coconut, Sprite or tonic" }, price: 3000 },
-      { name: { hu: "Happy shot", en: "Happy shot" }, desc: { hu: "6 cl vodka, 2 cl Passoa, maracujaszirup, ananászlé", en: "6 cl vodka, 2 cl Passoa, passion fruit syrup, pineapple juice" }, price: 3450 },
-    ],
-  },
-  {
-    id: "deals",
-    title: { hu: "Akciók és bottle service", en: "Deals & bottle service" },
-    items: [
-      { name: { hu: "Match Day MVP", en: "Match Day MVP" }, desc: { hu: "2 × 0,5 l csapolt sör + nachos", en: "2 × 500 ml draught beers + nachos" }, price: 4900, group: { hu: "Akciós csomagok", en: "Deals" } },
-      { name: { hu: "Pop & Cheers", en: "Pop & Cheers" }, desc: { hu: "2 × 0,5 l csapolt sör + egy tál popcorn", en: "2 × 500 ml draught beers + a bowl of popcorn" }, price: 3500 },
-      { name: { hu: "Wing Squad", en: "Wing Squad" }, desc: { hu: "4 × 0,5 l csapolt sör + csípős nachos", en: "4 × 500 ml draught beers + spicy nachos" }, price: 8900 },
-      { name: { hu: "Golden Hour Duo", en: "Golden Hour Duo" }, desc: { hu: "2 Aperol Spritz + nachos", en: "2 Aperol Spritz + nachos" }, price: 7500 },
-      { name: { hu: "Vodka Party Set", en: "Vodka Party Set" }, desc: { hu: "0,7 l vodka + 4 × 250 ml Red Bull + jég és lime", en: "700 ml vodka + 4 × 250 ml Red Bull + ice and lime" }, price: 24900, group: { hu: "Palackok és mixerek", en: "Bottles & mixers" } },
-      { name: { hu: "Gin & Tonic Set", en: "Gin & Tonic Set" }, desc: { hu: "0,7 l gin + 4 × 200 ml tonik + jég és citrusok", en: "700 ml gin + 4 × 200 ml tonic + ice and citrus" }, price: 23900 },
-      { name: { hu: "Rum & Cola Set", en: "Rum & Cola Set" }, desc: { hu: "0,7 l fehér rum + 4 × 250 ml Coca-Cola + jég és lime", en: "700 ml white rum + 4 × 250 ml Coca-Cola + ice and lime" }, price: 22900 },
-      { name: { hu: "Whiskey & Cola Set", en: "Whiskey & Cola Set" }, desc: { hu: "0,7 l bourbon whiskey + 4 × 250 ml Coca-Cola + jég", en: "700 ml bourbon whiskey + 4 × 250 ml Coca-Cola + ice" }, price: 26900 },
-      { name: { hu: "Tequila Crew Set", en: "Tequila Crew Set" }, desc: { hu: "0,7 l blanco tequila + lime, só + 1 l narancslé", en: "700 ml blanco tequila + lime, salt + 1 litre orange juice" }, price: 24900 },
-      { name: { hu: "Extra Red Bull", en: "Extra Red Bull" }, desc: { hu: "250 ml", en: "250 ml" }, price: 1300, group: { hu: "Extra mixerek", en: "Extra mixers" } },
-      { name: { hu: "Extra Coca-Cola", en: "Extra Coca-Cola" }, desc: { hu: "250 ml", en: "250 ml" }, price: 900 },
-      { name: { hu: "Extra tonic", en: "Extra tonic" }, desc: { hu: "200 ml", en: "200 ml" }, price: 900 },
-      { name: { hu: "Narancslé", en: "Orange juice" }, desc: { hu: "1 l kancsó", en: "1 litre jug" }, price: 2500 },
-    ],
-  },
-  {
-    id: "spirits",
-    title: { hu: "Röviditalok", en: "Spirits" },
-    items: [
-      { name: { hu: "Panyolai kajszi", en: "Panyolai kajszi" }, price: 2200, group: { hu: "Pálinka", en: "Pálinka" } },
-      { name: { hu: "Panyolai szilva", en: "Panyolai szilva" }, price: 2200 },
-      { name: { hu: "Panyolai körte", en: "Panyolai körte" }, price: 2200 },
-      { name: { hu: "Panyolai irsai olivér", en: "Panyolai irsai olivér" }, price: 2200 },
-      { name: { hu: "Panyolai meggy", en: "Panyolai meggy" }, price: 2200 },
-      { name: { hu: "Panyolai szamóca", en: "Panyolai szamóca" }, price: 2200 },
-      { name: { hu: "Panyolai málna", en: "Panyolai málna" }, price: 2200 },
-      { name: { hu: "Panyolai aranyalma", en: "Panyolai aranyalma" }, price: 2200 },
-      { name: { hu: "Panyolai mák", en: "Panyolai mák" }, price: 2200 },
-      { name: { hu: "Finlandia", en: "Finlandia" }, price: 1290, group: { hu: "Vodka", en: "Vodka" } },
-      { name: { hu: "Russian Standard", en: "Russian Standard" }, price: 1390 },
-      { name: { hu: "Beluga Noble", en: "Beluga Noble" }, price: 5390 },
-      { name: { hu: "Ciroc", en: "Ciroc" }, price: 1990 },
-      { name: { hu: "Ciroc apple", en: "Ciroc apple" }, price: 2390 },
-      { name: { hu: "Ciroc Mango", en: "Ciroc Mango" }, price: 2390 },
-      { name: { hu: "Ciroc Red Berry", en: "Ciroc Red Berry" }, price: 2390 },
-      { name: { hu: "Belvedere", en: "Belvedere" }, price: 1990 },
-      { name: { hu: "Absolut Elyx", en: "Absolut Elyx" }, price: 1290 },
-      { name: { hu: "Neft", en: "Neft" }, price: 1590 },
-      { name: { hu: "Bacardi", en: "Bacardi" }, price: 1390, group: { hu: "Rum", en: "Rum" } },
-      { name: { hu: "Kraken Black Spiced", en: "Kraken Black Spiced" }, price: 1690 },
-      { name: { hu: "Diplomatico", en: "Diplomatico" }, price: 2490 },
-      { name: { hu: "Demons Share", en: "Demons Share" }, price: 2490 },
-      { name: { hu: "Fallen Angel Spiced", en: "Fallen Angel Spiced" }, price: 4990 },
-      { name: { hu: "Don Papa", en: "Don Papa" }, price: 3790 },
-      { name: { hu: "Bumbu", en: "Bumbu" }, price: 2890 },
-      { name: { hu: "Bumbu XO", en: "Bumbu XO" }, price: 3490 },
-      { name: { hu: "Zacapa Centenario 23y", en: "Zacapa Centenario 23y" }, price: 5190 },
-      { name: { hu: "Zacapa XO", en: "Zacapa XO" }, price: 8290 },
-      { name: { hu: "Santa Teresa", en: "Santa Teresa" }, price: 4400 },
-      { name: { hu: "Abuello XII", en: "Abuello XII" }, price: 2500 },
-      { name: { hu: "Companero", en: "Companero" }, price: 2590 },
-      { name: { hu: "Companero orange", en: "Companero orange" }, price: 2190 },
-      { name: { hu: "QRM", en: "QRM" }, price: 1800 },
-      { name: { hu: "Plantation", en: "Plantation" }, price: 3490 },
-      { name: { hu: "Brugal 1888", en: "Brugal 1888" }, price: 2490 },
-      { name: { hu: "Bombay", en: "Bombay" }, price: 1390, group: { hu: "Gin", en: "Gin" } },
-      { name: { hu: "Bulldog", en: "Bulldog" }, price: 1890 },
-      { name: { hu: "Hendricks", en: "Hendricks" }, price: 2690 },
-      { name: { hu: "Tanqueray no.10", en: "Tanqueray no.10" }, price: 2190 },
-      { name: { hu: "Mrs. Millicent", en: "Mrs. Millicent" }, price: 2990 },
-      { name: { hu: "Puerto de Indias pink", en: "Puerto de Indias pink" }, price: 2190 },
-      { name: { hu: "Adamus", en: "Adamus" }, price: 4000 },
-      { name: { hu: "Black tomato", en: "Black tomato" }, price: 2150 },
-      { name: { hu: "Monkey 47", en: "Monkey 47" }, price: 2990 },
-      { name: { hu: "Amuerte", en: "Amuerte" }, price: 3990 },
-      { name: { hu: "Jim Beam", en: "Jim Beam" }, price: 1290, group: { hu: "Whiskey", en: "Whiskey" } },
-      { name: { hu: "Jack Daniels", en: "Jack Daniels" }, price: 1290 },
-      { name: { hu: "Jameson", en: "Jameson" }, price: 1590 },
-      { name: { hu: "Chivas Regal 12y", en: "Chivas Regal 12y" }, price: 2190 },
-      { name: { hu: "Glenfiddich", en: "Glenfiddich" }, price: 1390 },
-      { name: { hu: "Nikka From The Barrel", en: "Nikka From The Barrel" }, price: 3690 },
-      { name: { hu: "Laphroaig 10y", en: "Laphroaig 10y" }, price: 2890 },
-      { name: { hu: "Laphroaig 12y", en: "Laphroaig 12y" }, price: 3190 },
-      { name: { hu: "Jagermaister", en: "Jagermaister" }, price: 1290, group: { hu: "Likőr & vermut", en: "Liqueur & vermouth" } },
-      { name: { hu: "Unicum", en: "Unicum" }, price: 1390 },
-      { name: { hu: "Unicum Szilva", en: "Unicum Szilva" }, price: 1390 },
-      { name: { hu: "Unicum Riserva", en: "Unicum Riserva" }, price: 1990 },
-      { name: { hu: "Tátratea 22%", en: "Tátratea 22%" }, price: 1890 },
-      { name: { hu: "Tátratea 42%", en: "Tátratea 42%" }, price: 1890 },
-      { name: { hu: "Tátratea 52%", en: "Tátratea 52%" }, price: 1890 },
-      { name: { hu: "Tátratea 62%", en: "Tátratea 62%" }, price: 1890 },
-      { name: { hu: "Tátratea 67%", en: "Tátratea 67%" }, price: 1890 },
-      { name: { hu: "Tátratea 72%", en: "Tátratea 72%" }, price: 1990 },
-      { name: { hu: "Baileys", en: "Baileys" }, price: 1690 },
-      { name: { hu: "Metaxa 5*", en: "Metaxa 5*" }, price: 1190, group: { hu: "Konyak & tequila", en: "Cognac & tequila" } },
-      { name: { hu: "Henessy", en: "Henessy" }, price: 1990 },
-      { name: { hu: "Jose Cuervo Silver", en: "Jose Cuervo Silver" }, price: 1090 },
-      { name: { hu: "Jose Cuervo Gold", en: "Jose Cuervo Gold" }, price: 1090 },
-    ],
-  },
-  {
-    id: "soft",
-    title: { hu: "Üdítők", en: "Soft drinks" },
-    items: [
-      { name: { hu: "Coca Cola", en: "Coca Cola" }, price: 790, group: { hu: "Szénsavas üdítők", en: "Sparkling soft drinks" } },
-      { name: { hu: "Coca Cola Zero", en: "Coca Cola Zero" }, price: 790 },
-      { name: { hu: "Pepsi", en: "Pepsi" }, price: 790 },
-      { name: { hu: "Pepsi Zero", en: "Pepsi Zero" }, price: 790 },
-      { name: { hu: "Fanta", en: "Fanta" }, price: 790 },
-      { name: { hu: "Sprite Zero", en: "Sprite Zero" }, price: 790 },
-      { name: { hu: "Kinley tonic", en: "Kinley tonic" }, price: 790 },
-      { name: { hu: "Kinley purple", en: "Kinley purple" }, price: 790 },
-      { name: { hu: "Kinley gyömbér", en: "Kinley gyömbér" }, price: 790 },
-      { name: { hu: "Kinley berry", en: "Kinley berry" }, price: 790 },
-      { name: { hu: "7UP", en: "7UP" }, price: 790 },
-      { name: { hu: "Schweppes Tonic", en: "Schweppes Tonic" }, price: 790 },
-      { name: { hu: "Schweppes Pink Tonic", en: "Schweppes Pink Tonic" }, price: 790 },
-      { name: { hu: "Schweppes Narancs", en: "Schweppes Narancs" }, price: 790 },
-      { name: { hu: "Schweppes Citrus Mix", en: "Schweppes Citrus Mix" }, price: 790 },
-      { name: { hu: "Canada Dry", en: "Canada Dry" }, price: 790 },
-      { name: { hu: "Thomas Henry Cherry Blossom", en: "Thomas Henry Cherry Blossom" }, price: 790 },
-      { name: { hu: "Thomas Henry Botanical", en: "Thomas Henry Botanical" }, price: 790 },
-      { name: { hu: "J. Gasco uborkás", en: "J. Gasco uborkás" }, price: 790 },
-      { name: { hu: "Three Cents gyömbérsör", en: "Three Cents gyömbérsör" }, price: 790 },
-      { name: { hu: "FuzeTea citrom", en: "FuzeTea citrom" }, price: 790, group: { hu: "Jeges tea és gyümölcslé", en: "Iced tea & juice" } },
-      { name: { hu: "FuzeTea barack", en: "FuzeTea barack" }, price: 790 },
-      { name: { hu: "Toma őszibarack", en: "Toma őszibarack" }, price: 790 },
-      { name: { hu: "Toma alma", en: "Toma alma" }, price: 790 },
-      { name: { hu: "Toma körte", en: "Toma körte" }, price: 790 },
-      { name: { hu: "Toma eper", en: "Toma eper" }, price: 790 },
-      { name: { hu: "Toma fekete ribizli", en: "Toma fekete ribizli" }, price: 790 },
-      { name: { hu: "Cappy alma", en: "Cappy alma" }, price: 790 },
-      { name: { hu: "Cappy eper", en: "Cappy eper" }, price: 790 },
-      { name: { hu: "Cappy körte", en: "Cappy körte" }, price: 790 },
-      { name: { hu: "Cappy narancs", en: "Cappy narancs" }, price: 790 },
-      { name: { hu: "Cappy Grapefruit", en: "Cappy Grapefruit" }, price: 790 },
-      { name: { hu: "Cappy őszibarack", en: "Cappy őszibarack" }, price: 790 },
-      { name: { hu: "Szentkirályi mentes 0,33L", en: "Szentkirályi mentes 0,33L" }, price: 690, group: { hu: "Ásványvíz", en: "Mineral water" } },
-      { name: { hu: "Szentkirályi savas 0,33L", en: "Szentkirályi savas 0,33L" }, price: 690 },
-      { name: { hu: "Szentkirályi mentes 0,75L", en: "Szentkirályi mentes 0,75L" }, price: 1050 },
-      { name: { hu: "Szentkirályi savas 0,75L", en: "Szentkirályi savas 0,75L" }, price: 1050 },
-      { name: { hu: "Lime", en: "Lime" }, price: 1390, group: { hu: "Ízesített víz", en: "Flavoured water" } },
-      { name: { hu: "Eper", en: "Eper" }, price: 1390 },
-      { name: { hu: "Málna", en: "Málna" }, price: 1390 },
-      { name: { hu: "Áfonya", en: "Áfonya" }, price: 1390 },
-      { name: { hu: "Feketeribizli", en: "Feketeribizli" }, price: 1390 },
-      { name: { hu: "Bodza", en: "Bodza" }, price: 1390 },
-      { name: { hu: "Erdei gyümölcs", en: "Erdei gyümölcs" }, price: 1390 },
-      { name: { hu: "Mangó", en: "Mangó" }, price: 1390 },
-      { name: { hu: "Citrom-Lime-Menta", en: "Citrom-Lime-Menta" }, price: 1390 },
-      { name: { hu: "Gránátalma", en: "Gránátalma" }, price: 1390 },
-      { name: { hu: "Görögdinnye", en: "Görögdinnye" }, price: 1390 },
-      { name: { hu: "Citrom", en: "Citrom" }, price: 1490, group: { hu: "Házi limonádék (cukormentes is)", en: "Homemade lemonades (sugar-free too)" } },
-      { name: { hu: "Fekete ribizli", en: "Fekete ribizli" }, price: 1490 },
-      { name: { hu: "Mangó", en: "Mangó" }, price: 1490 },
-      { name: { hu: "Red Bull energy drink", en: "Red Bull energy drink" }, price: 1090, group: { hu: "Energiaital", en: "Energy drinks" } },
-      { name: { hu: "Red Bull Sugarfree", en: "Red Bull Sugarfree" }, price: 1090 },
-      { name: { hu: "Red Bull white edition", en: "Red Bull white edition" }, price: 1090 },
-      { name: { hu: "Red Bull editions", en: "Red Bull editions" }, price: 1090 },
-    ],
-  },
-  {
-    id: "hot",
-    title: { hu: "Snackek és forró italok", en: "Snacks & hot drinks" },
-    items: [
-      { name: { hu: "Harmónia ideje", en: "Harmónia ideje" }, desc: { hu: "marcipán, fahéjas alma tónusaival", en: "marcipán, fahéjas alma tónusaival" }, price: 1250, group: { hu: "Fekete tea", en: "Black tea" } },
-      { name: { hu: "Earl Grey", en: "Earl Grey" }, desc: { hu: "kivételesen frissítő", en: "kivételesen frissítő" }, price: 1250 },
-      { name: { hu: "Masala Chai", en: "Masala Chai" }, desc: { hu: "fokozza az immunrendszert", en: "fokozza az immunrendszert" }, price: 1250 },
-      { name: { hu: "Ceylon", en: "Ceylon" }, desc: { hu: "kézzel szüretelt, világ top10", en: "kézzel szüretelt, világ top10" }, price: 1250 },
-      { name: { hu: "Egészség & Szépség", en: "Egészség & Szépség" }, desc: { hu: "vitaminok, ásványi anyagok, antioxidánsok", en: "vitaminok, ásványi anyagok, antioxidánsok" }, price: 1250 },
-      { name: { hu: "English Breakfast", en: "English Breakfast" }, desc: { hu: "az Angolok klasszikus teája", en: "az Angolok klasszikus teája" }, price: 1250 },
-      { name: { hu: "Yunnan Prémium", en: "Yunnan Prémium" }, desc: { hu: "Herkules erejével", en: "Herkules erejével" }, price: 1250 },
-      { name: { hu: "Spanyol Mandarin", en: "Spanyol Mandarin" }, desc: { hu: "ceyloni alap, gyümölcsökkel", en: "ceyloni alap, gyümölcsökkel" }, price: 1250 },
-      { name: { hu: "Gunpowder Temple of Heaven", en: "Gunpowder Temple of Heaven" }, desc: { hu: "klasszikus zöld", en: "klasszikus zöld" }, price: 1250, group: { hu: "Zöld tea", en: "Green tea" } },
-      { name: { hu: "Édes Sárgabarack", en: "Édes Sárgabarack" }, desc: { hu: "zöld tea, sárgabarackkal", en: "zöld tea, sárgabarackkal" }, price: 1250 },
-      { name: { hu: "Áfonyás–Epres Sencha", en: "Áfonyás–Epres Sencha" }, desc: { hu: "Japán klasszikus teája", en: "Japán klasszikus teája" }, price: 1250 },
-      { name: { hu: "Jázminos Zöld tea", en: "Jázminos Zöld tea" }, price: 1250 },
-      { name: { hu: "Espresso", en: "Espresso" }, group: { hu: "Kávék", en: "Coffee" } },
-      { name: { hu: "Cappuccino", en: "Cappuccino" } },
-      { name: { hu: "Sajtos snack", en: "Cheese snack" }, price: 750, group: { hu: "Snackek", en: "Snacks" } },
-      { name: { hu: "Sós snack", en: "Salted snack" }, price: 750 },
-      { name: { hu: "Vajas snack", en: "Butter snack" }, price: 750 },
-      { name: { hu: "Sós popcorn", en: "Salted popcorn" }, price: 1950 },
-      { name: { hu: "Sajtos popcorn", en: "Cheese popcorn" }, price: 1950 },
-      { name: { hu: "BBQ popcorn", en: "BBQ popcorn" }, price: 1950 },
-      { name: { hu: "Nachos", en: "Nachos" }, desc: { hu: "Választható szósz: sajt vagy salsa", en: "Choice of dip: cheese or salsa" } },
-    ],
-  },
-];
+export type MenuCategory = {
+  name: string;
+  groups: {
+    titleHu: string;
+    titleEn: string;
+    items: MenuItem[];
+  }[];
+};
 
-// Group thousands with a non-breaking space by hand: some browsers have no
-// hu-HU locale data and would otherwise render "5500 Ft".
-export const formatPrice = (n: number) =>
-  `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0")} Ft`;
+/** A táblázatból érkező nyers adatok */
+const raw: MenuItem[] = (menuData as any) || [];
+
+/** Kategóriákba és csoportokba rendezi az itallapot */
+export function getMenu(): MenuCategory[] {
+  const categories = new Map<string, Map<string, MenuItem[]>>();
+
+  for (const item of raw) {
+    if (!item.name) continue;
+
+    if (!categories.has(item.category)) {
+      categories.set(item.category, new Map());
+    }
+    const groups = categories.get(item.category)!;
+
+    const groupKey = item.groupHu || '__nogroup__';
+    if (!groups.has(groupKey)) {
+      groups.set(groupKey, []);
+    }
+    groups.get(groupKey)!.push(item);
+  }
+
+  const result: MenuCategory[] = [];
+
+  for (const [catName, groups] of categories) {
+    const groupList = [];
+    for (const [groupKey, items] of groups) {
+      groupList.push({
+        titleHu: groupKey === '__nogroup__' ? '' : groupKey,
+        titleEn: items[0]?.groupEn || '',
+        items,
+      });
+    }
+    result.push({
+      name: catName,
+      groups: groupList,
+    });
+  }
+
+  return result;
+}
+
+/** Egyszerű lista az összes tételről (pl. kereséshez) */
+export function getAllItems(): MenuItem[] {
+  return raw.filter(i => i.name);
+}
