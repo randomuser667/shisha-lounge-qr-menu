@@ -2,7 +2,7 @@ export type Lang = "hu" | "en";
 type T = { hu: string; en: string };
 
 // price is optional: items without a known price show no price yet.
-export type MenuItem = { name: T; desc?: T; price?: number; mostOrdered?: boolean; group?: T };
+export type MenuItem = { name: T; desc?: T; price?: number; group?: T };
 export type Category = { id: string; title: T; items: MenuItem[] };
 
 export const menu: Category[] = [
@@ -10,7 +10,7 @@ export const menu: Category[] = [
     id: "shisha",
     title: { hu: "Vízipipa", en: "Shisha" },
     items: [
-      { name: { hu: "Blue ice", en: "Blue ice" }, desc: { hu: "áfonya jég", en: "áfonya jég" }, price: 6000, mostOrdered: true, group: { hu: "Prémium · 6000 Ft", en: "Premium · 6000 Ft" } },
+      { name: { hu: "Blue ice", en: "Blue ice" }, desc: { hu: "áfonya jég", en: "áfonya jég" }, price: 6000, group: { hu: "Prémium · 6000 Ft", en: "Premium · 6000 Ft" } },
       { name: { hu: "Grape mint", en: "Grape mint" }, desc: { hu: "szőlő, menta", en: "szőlő, menta" }, price: 6000 },
       { name: { hu: "Queen", en: "Queen" }, desc: { hu: "trópusi gyümölcsök", en: "trópusi gyümölcsök" }, price: 6000 },
       { name: { hu: "Tripleberry", en: "Tripleberry" }, desc: { hu: "erdeigyümölcs mix", en: "erdeigyümölcs mix" }, price: 6000 },
@@ -20,21 +20,17 @@ export const menu: Category[] = [
       { name: { hu: "Ice lemon raspberry", en: "Ice lemon raspberry" }, desc: { hu: "málna, citrom, jég", en: "málna, citrom, jég" }, price: 6000 },
       { name: { hu: "Purple candy", en: "Purple candy" }, desc: { hu: "szőlő, áfonya, jég", en: "szőlő, áfonya, jég" }, price: 6000 },
       { name: { hu: "Love xx", en: "Love xx" }, desc: { hu: "görögdinnye, sárgadinnye, mangó", en: "görögdinnye, sárgadinnye, mangó" }, price: 6000 },
-      { name: { hu: "English mix", en: "English mix" }, desc: { hu: "jégkrém, barack, mangó, menta", en: "jégkrém, barack, mangó, menta" }, price: 6000 },
       { name: { hu: "Ballon d'or", en: "Ballon d'or" }, desc: { hu: "eper, sárgadinnye", en: "eper, sárgadinnye" }, price: 6000 },
-      { name: { hu: "Jungle", en: "Jungle" }, desc: { hu: "karamella, chai latte, citrus", en: "karamella, chai latte, citrus" }, price: 6000 },
       { name: { hu: "Exotic time", en: "Exotic time" }, desc: { hu: "őszibarack, maracuja, görögdinnye", en: "őszibarack, maracuja, görögdinnye" }, price: 6000 },
       { name: { hu: "Word berry", en: "Word berry" }, desc: { hu: "áfonya, feketeribizli, eper, málna", en: "áfonya, feketeribizli, eper, málna" }, price: 6000 },
       { name: { hu: "Miamor", en: "Miamor" }, desc: { hu: "ananász, banán, menta", en: "ananász, banán, menta" }, price: 6000 },
       { name: { hu: "Rejavou", en: "Rejavou" }, desc: { hu: "vanília, sárgadinnye, karamella", en: "vanília, sárgadinnye, karamella" }, price: 6000 },
       { name: { hu: "Chamelon", en: "Chamelon" }, desc: { hu: "papaja, ananász, mangó, jég", en: "papaja, ananász, mangó, jég" }, price: 6000 },
       { name: { hu: "Hawaii", en: "Hawaii" }, desc: { hu: "mangó, ananász, menta", en: "mangó, ananász, menta" }, price: 6000 },
-      { name: { hu: "Eterna", en: "Eterna" }, desc: { hu: "vanília, csoki, szivar", en: "vanília, csoki, szivar" }, price: 6000 },
       { name: { hu: "Ice cactus", en: "Ice cactus" }, desc: { hu: "kaktusz, jég", en: "kaktusz, jég" }, price: 6000 },
       { name: { hu: "Okolom", en: "Okolom" }, desc: { hu: "bodzavirág, lime, menta", en: "bodzavirág, lime, menta" }, price: 6000 },
       { name: { hu: "Arctic line", en: "Arctic line" }, desc: { hu: "lime, citrom, menta", en: "lime, citrom, menta" }, price: 6000 },
       { name: { hu: "Louis Vuitton", en: "Louis Vuitton" }, desc: { hu: "erdeigyümölcs, menta", en: "erdeigyümölcs, menta" }, price: 6000 },
-      { name: { hu: "Prada", en: "Prada" }, desc: { hu: "rózsás limonádé", en: "rózsás limonádé" }, price: 6000 },
       { name: { hu: "Okolom jojo berry", en: "Okolom jojo berry" }, desc: { hu: "citrom, bodza, feketeribizli, menta", en: "citrom, bodza, feketeribizli, menta" }, price: 6000 },
       { name: { hu: "Tropic maracuja", en: "Tropic maracuja" }, desc: { hu: "maracuja", en: "maracuja" }, price: 7000, group: { hu: "Hardcore · 7000 Ft", en: "Hardcore · 7000 Ft" } },
       { name: { hu: "Lime candy", en: "Lime candy" }, desc: { hu: "lime, cukorka", en: "lime, cukorka" }, price: 7000 },
@@ -49,7 +45,6 @@ export const menu: Category[] = [
       { name: { hu: "Jelly cola", en: "Jelly cola" }, desc: { hu: "kóla", en: "kóla" }, price: 7000 },
       { name: { hu: "Harmony", en: "Harmony" }, desc: { hu: "ananász, maracuja, citrom", en: "ananász, maracuja, citrom" }, price: 7000 },
       { name: { hu: "Granate", en: "Granate" }, desc: { hu: "gránátalma", en: "gránátalma" }, price: 7000 },
-      { name: { hu: "Levander lemonade", en: "Levander lemonade" }, desc: { hu: "levendulás limonádé", en: "levendulás limonádé" }, price: 7000 },
       { name: { hu: "Melon", en: "Melon" }, desc: { hu: "sárgadinnye", en: "sárgadinnye" }, price: 7000 },
       { name: { hu: "Citrus jelly", en: "Citrus jelly" }, desc: { hu: "citrus", en: "citrus" }, price: 7000 },
     ],
@@ -58,7 +53,7 @@ export const menu: Category[] = [
     id: "cocktails",
     title: { hu: "Koktélok és shotok", en: "Cocktails & shots" },
     items: [
-      { name: { hu: "Aperol Spritz", en: "Aperol Spritz" }, desc: { hu: "6 cl Aperol + 1 dl prosecco, szóda, Angostura bitters", en: "6 cl Aperol + 1 dl prosecco, soda, Angostura bitters" }, price: 2290, mostOrdered: true },
+      { name: { hu: "Aperol Spritz", en: "Aperol Spritz" }, desc: { hu: "6 cl Aperol + 1 dl prosecco, szóda, Angostura bitters", en: "6 cl Aperol + 1 dl prosecco, soda, Angostura bitters" }, price: 2290 },
       { name: { hu: "Hugo", en: "Hugo" }, desc: { hu: "lime, menta, 4 cl bodzaszirup, 1,5 dl prosecco + szóda", en: "lime, mint, 4 cl elderflower syrup, 1.5 dl prosecco + soda" }, price: 2290 },
       { name: { hu: "Cosmo", en: "Cosmo" }, desc: { hu: "2 cl citromlé, 4 cl vodka (Russian), 2 cl triple sec", en: "2 cl lemon juice, 4 cl vodka (Russian), 2 cl triple sec" }, price: 2490 },
       { name: { hu: "Cuba Libre", en: "Cuba Libre" }, desc: { hu: "lime, 4 cl Bacardi Spiced + cola", en: "lime, 4 cl Bacardi Spiced + cola" }, price: 2290 },
@@ -88,11 +83,11 @@ export const menu: Category[] = [
     id: "deals",
     title: { hu: "Akciók és bottle service", en: "Deals & bottle service" },
     items: [
-      { name: { hu: "Match Day MVP", en: "Match Day MVP" }, desc: { hu: "2 × 0,5 l csapolt sör + nachos", en: "2 × 500 ml draught beers + nachos" }, price: 4900, mostOrdered: true, group: { hu: "Akciós csomagok", en: "Deals" } },
+      { name: { hu: "Match Day MVP", en: "Match Day MVP" }, desc: { hu: "2 × 0,5 l csapolt sör + nachos", en: "2 × 500 ml draught beers + nachos" }, price: 4900, group: { hu: "Akciós csomagok", en: "Deals" } },
       { name: { hu: "Pop & Cheers", en: "Pop & Cheers" }, desc: { hu: "2 × 0,5 l csapolt sör + egy tál popcorn", en: "2 × 500 ml draught beers + a bowl of popcorn" }, price: 3500 },
       { name: { hu: "Wing Squad", en: "Wing Squad" }, desc: { hu: "4 × 0,5 l csapolt sör + csípős nachos", en: "4 × 500 ml draught beers + spicy nachos" }, price: 8900 },
       { name: { hu: "Golden Hour Duo", en: "Golden Hour Duo" }, desc: { hu: "2 Aperol Spritz + nachos", en: "2 Aperol Spritz + nachos" }, price: 7500 },
-      { name: { hu: "Vodka Party Set", en: "Vodka Party Set" }, desc: { hu: "0,7 l vodka + 4 × 250 ml Red Bull + jég és lime", en: "700 ml vodka + 4 × 250 ml Red Bull + ice and lime" }, price: 24900, mostOrdered: true, group: { hu: "Palackok és mixerek", en: "Bottles & mixers" } },
+      { name: { hu: "Vodka Party Set", en: "Vodka Party Set" }, desc: { hu: "0,7 l vodka + 4 × 250 ml Red Bull + jég és lime", en: "700 ml vodka + 4 × 250 ml Red Bull + ice and lime" }, price: 24900, group: { hu: "Palackok és mixerek", en: "Bottles & mixers" } },
       { name: { hu: "Gin & Tonic Set", en: "Gin & Tonic Set" }, desc: { hu: "0,7 l gin + 4 × 200 ml tonik + jég és citrusok", en: "700 ml gin + 4 × 200 ml tonic + ice and citrus" }, price: 23900 },
       { name: { hu: "Rum & Cola Set", en: "Rum & Cola Set" }, desc: { hu: "0,7 l fehér rum + 4 × 250 ml Coca-Cola + jég és lime", en: "700 ml white rum + 4 × 250 ml Coca-Cola + ice and lime" }, price: 22900 },
       { name: { hu: "Whiskey & Cola Set", en: "Whiskey & Cola Set" }, desc: { hu: "0,7 l bourbon whiskey + 4 × 250 ml Coca-Cola + jég", en: "700 ml bourbon whiskey + 4 × 250 ml Coca-Cola + ice" }, price: 26900 },
@@ -116,7 +111,7 @@ export const menu: Category[] = [
       { name: { hu: "Panyolai málna", en: "Panyolai málna" }, price: 2200 },
       { name: { hu: "Panyolai aranyalma", en: "Panyolai aranyalma" }, price: 2200 },
       { name: { hu: "Panyolai mák", en: "Panyolai mák" }, price: 2200 },
-      { name: { hu: "Finlandia", en: "Finlandia" }, price: 1290, mostOrdered: true, group: { hu: "Vodka", en: "Vodka" } },
+      { name: { hu: "Finlandia", en: "Finlandia" }, price: 1290, group: { hu: "Vodka", en: "Vodka" } },
       { name: { hu: "Russian Standard", en: "Russian Standard" }, price: 1390 },
       { name: { hu: "Beluga Noble", en: "Beluga Noble" }, price: 5390 },
       { name: { hu: "Ciroc", en: "Ciroc" }, price: 1990 },
@@ -182,7 +177,7 @@ export const menu: Category[] = [
     id: "soft",
     title: { hu: "Üdítők", en: "Soft drinks" },
     items: [
-      { name: { hu: "Coca Cola", en: "Coca Cola" }, price: 790, mostOrdered: true, group: { hu: "Szénsavas üdítők", en: "Sparkling soft drinks" } },
+      { name: { hu: "Coca Cola", en: "Coca Cola" }, price: 790, group: { hu: "Szénsavas üdítők", en: "Sparkling soft drinks" } },
       { name: { hu: "Coca Cola Zero", en: "Coca Cola Zero" }, price: 790 },
       { name: { hu: "Pepsi", en: "Pepsi" }, price: 790 },
       { name: { hu: "Pepsi Zero", en: "Pepsi Zero" }, price: 790 },
@@ -230,7 +225,7 @@ export const menu: Category[] = [
       { name: { hu: "Citrom-Lime-Menta", en: "Citrom-Lime-Menta" }, price: 1390 },
       { name: { hu: "Gránátalma", en: "Gránátalma" }, price: 1390 },
       { name: { hu: "Görögdinnye", en: "Görögdinnye" }, price: 1390 },
-      { name: { hu: "Citrom", en: "Citrom" }, price: 1490, mostOrdered: true, group: { hu: "Házi limonádék (cukormentes is)", en: "Homemade lemonades (sugar-free too)" } },
+      { name: { hu: "Citrom", en: "Citrom" }, price: 1490, group: { hu: "Házi limonádék (cukormentes is)", en: "Homemade lemonades (sugar-free too)" } },
       { name: { hu: "Fekete ribizli", en: "Fekete ribizli" }, price: 1490 },
       { name: { hu: "Mangó", en: "Mangó" }, price: 1490 },
       { name: { hu: "Red Bull energy drink", en: "Red Bull energy drink" }, price: 1090, group: { hu: "Energiaital", en: "Energy drinks" } },
@@ -260,7 +255,7 @@ export const menu: Category[] = [
       { name: { hu: "Sajtos snack", en: "Cheese snack" }, price: 750, group: { hu: "Snackek", en: "Snacks" } },
       { name: { hu: "Sós snack", en: "Salted snack" }, price: 750 },
       { name: { hu: "Vajas snack", en: "Butter snack" }, price: 750 },
-      { name: { hu: "Sós popcorn", en: "Salted popcorn" }, price: 1950, mostOrdered: true },
+      { name: { hu: "Sós popcorn", en: "Salted popcorn" }, price: 1950 },
       { name: { hu: "Sajtos popcorn", en: "Cheese popcorn" }, price: 1950 },
       { name: { hu: "BBQ popcorn", en: "BBQ popcorn" }, price: 1950 },
       { name: { hu: "Nachos", en: "Nachos" }, desc: { hu: "Választható szósz: sajt vagy salsa", en: "Choice of dip: cheese or salsa" } },

@@ -1,7 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { menu, formatPrice, type Category } from "@/lib/menu";
 import { useLang, LangToggle } from "@/lib/lang";
-import { Star } from "lucide-react";
 import { Fragment } from "react";
 
 export const Route = createFileRoute("/menu/$category")({
@@ -117,7 +116,6 @@ function CategorySlide() {
           <li
             className="rounded-xl border bg-card/70 p-4 animate-in fade-in slide-in-from-bottom-2"
           >
-             {item.mostOrdered && <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-gold"><Star className="h-3.5 w-3.5 shrink-0 fill-current" aria-hidden="true" />{lang === "hu" ? "Legtöbbet rendelt" : "Most ordered"}</p>}
              <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                <h3 className="min-w-0 font-display text-lg break-words">{item.name[lang]}</h3>
                {item.price != null && <span className="shrink-0 whitespace-nowrap font-semibold text-gold">{formatPrice(item.price)}</span>}
