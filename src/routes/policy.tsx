@@ -4,10 +4,10 @@ import { useLang, LangToggle } from "@/lib/lang";
 export const Route = createFileRoute("/policy")({
   head: () => ({
     meta: [
-      { title: "#Hashtag — Vízipipa szabályzat / Shisha policy" },
-      { name: "description", content: "House rules for enjoying shisha at #Hashtag lounge." },
-      { property: "og:title", content: "#Hashtag — Shisha policy" },
-      { property: "og:description", content: "House rules for enjoying shisha at #Hashtag lounge." },
+      { title: "#Hashtag — Vízipipa Bár Házirend / Shisha House Rules" },
+      { name: "description", content: "House rules for shisha at #Hashtag lounge." },
+      { property: "og:title", content: "#Hashtag — Shisha House Rules" },
+      { property: "og:description", content: "House rules for shisha at #Hashtag lounge." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
