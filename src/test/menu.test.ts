@@ -28,12 +28,19 @@ describe("Guest menu", () => {
   it("never lists fries", () => {
     expect(menu.flatMap((c) => c.items).some((i) => /fries|hasáb/i.test(i.name.en + (i.desc?.en ?? "")))).toBe(false);
   });
-  it("lists only the bar's 21 cocktails at the bar's prices", () => {
-    expect(cat("cocktails").items).toHaveLength(21);
-    expect(cat("cocktails").items.find((i) => i.name.hu === "Aperol Spritz")?.price).toBe(2290);
-    expect(cat("cocktails").items.find((i) => i.name.hu === "Long Island")?.price).toBe(3590);
+  it("lists the bar's 21 cocktails plus the three shots at the bottom", () => {
+    const items = cat("cocktails").items;
+    expect(items).toHaveLength(24);
+    expect(items.find((i) => i.name.hu === "Aperol Spritz")?.price).toBe(2290);
+    expect(items.find((i) => i.name.hu === "Long Island")?.price).toBe(3590);
+    expect(items.slice(-3).map((i) => i.name.hu)).toEqual(["Speed shot", "Hashtag shot", "Happy shot"]);
+    expect(items.slice(-3).map((i) => i.price)).toEqual([4400, 3000, 3450]);
+    expect(cat("cocktails").title.hu).toContain("shot");
     expect(names("cocktails")).not.toContain("Golden Hashtag");
     expect(names("cocktails")).not.toContain("Gin Tonic");
+  });
+  it("has no Zero Proof deal", () => {
+    expect(names("deals")).not.toContain("Zero Proof, Full Vibe");
   });
   it("stars a most-ordered product in every section", () => {
     for (const c of menu) expect(c.items.some((i) => i.mostOrdered), c.id).toBe(true);
