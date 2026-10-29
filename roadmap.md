@@ -3,3 +3,4 @@
 - [x] Add bottle service, familiar club drinks, mixers, and snack sides.
 - [x] Rename the Hungarian snacks label and mark popular products in every section.
 - [x] Verify the menu additions and navigation.
+- [ ] Remove all bestseller markings, trim unusual shisha flavors, and verify the continuous cocktail order.
