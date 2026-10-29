@@ -16,14 +16,41 @@ export const Route = createFileRoute("/policy")({
 });
 
 const RULES = [
-  { hu: "Vízipipát csak 18 éven felüli vendégeink rendelhetnek. Kérésre igazolni kell az életkort.", en: "Shisha is served only to guests aged 18+. ID may be requested." },
-  { hu: "Várandós vendégeknek nem szolgálunk fel vízipipát.", en: "We do not serve shisha to pregnant guests." },
-  { hu: "A pipát kizárólag a személyzet helyezheti át, töltheti újra és cserélheti a szenet.", en: "Only staff may move, refill or change the coals of a pipe." },
-  { hu: "Saját dohány vagy pipa behozatala nem engedélyezett.", en: "Bringing your own tobacco or pipe is not allowed." },
-  { hu: "Minden vendég higiéniai szipkát kap — kérjük, ne cseréljétek egymás között.", en: "Every guest gets a hygienic mouthpiece — please do not share them." },
-  { hu: "Egy pipa kb. 60–90 percig élvezhető; szénfrissítés ingyenes.", en: "A pipe lasts about 60–90 minutes; coal refreshes are free." },
-  { hu: "A pipában okozott kárt (pl. törött üveg) felszámíthatjuk.", en: "Damage to the pipe (e.g. broken glass) may be charged." },
-  { hu: "Rosszullét esetén azonnal szólj a személyzetnek.", en: "If you feel unwell, tell the staff immediately." },
+  {
+    title: { hu: "A vízipipát a személyzet készíti el", en: "The shisha is prepared by the staff" },
+    body: {
+      hu: "A dohányt, a szenet, a csövet és a teljes összeállítást kizárólag a dolgozók kezelik.",
+      en: "The tobacco, the coals, the hose and the full setup are handled exclusively by our staff.",
+    },
+  },
+  {
+    title: { hu: "Kérés, panasz → személyzet", en: "Requests & complaints → staff" },
+    body: {
+      hu: "Ha bármire szükséged van (erősebb/lazább füst, más íz, több szén, tiszta szipka, víz, rendelés), fordulj a dolgozókhoz. Ne próbáld magad állítani vagy „javítani” a pipát.",
+      en: "If you need anything (stronger/lighter smoke, a different flavour, more coals, a clean mouthpiece, water, another order), ask our staff. Please don't adjust or \"fix\" the pipe yourself.",
+    },
+  },
+  {
+    title: { hu: "Tisztaság és rend", en: "Cleanliness & order" },
+    body: {
+      hu: "A hamutálat és a tálcát használd. Ne dobálj semmit a padlóra, és ne hagyj rendetlenséget az asztalon.",
+      en: "Use the ashtray and the tray. Please don't drop anything on the floor and don't leave the table messy.",
+    },
+  },
+  {
+    title: { hu: "Általános viselkedés", en: "General behaviour" },
+    body: {
+      hu: "Légy udvarias a többi vendéggel és a személyzettel. Hangoskodás, vitatkozás, agresszív viselkedés nem megengedett.",
+      en: "Be polite to other guests and to the staff. Loud arguing or aggressive behaviour is not allowed.",
+    },
+  },
+  {
+    title: { hu: "Saját dohány / saját vízipipa", en: "Own tobacco / own shisha" },
+    body: {
+      hu: "Saját dohány vagy saját vízipipa behozatala nem engedélyezett (kivéve, ha a hely külön engedi). Kérdezz rá a személyzetnél.",
+      en: "Bringing your own tobacco or shisha is not allowed (unless the venue allows it specifically). Ask our staff about it.",
+    },
+  },
 ];
 
 function PolicyPage() {
@@ -35,13 +62,16 @@ function PolicyPage() {
         <LangToggle />
       </header>
       <h1 className="mt-6 font-display text-3xl text-gold-gradient">
-        {lang === "hu" ? "Vízipipa szabályzat" : "Shisha policy"}
+        {lang === "hu" ? "Vízipipa Bár Házirend" : "Shisha Bar House Rules"}
       </h1>
       <ol className="mt-6 space-y-3">
         {RULES.map((r, i) => (
           <li key={i} className="flex gap-3 rounded-xl border bg-card/70 p-4 text-sm">
             <span className="font-display text-gold">{i + 1}.</span>
-            <span>{r[lang]}</span>
+            <span>
+              <span className="block font-display text-base text-foreground">{r.title[lang]}</span>
+              <span className="mt-1 block text-muted-foreground">{r.body[lang]}</span>
+            </span>
           </li>
         ))}
       </ol>
