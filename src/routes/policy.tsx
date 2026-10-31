@@ -17,38 +17,31 @@ export const Route = createFileRoute("/policy")({
 
 const RULES = [
   {
-    title: { hu: "A vízipipát a személyzet készíti el", en: "The shisha is prepared by the staff" },
+    title: { hu: "Csak 18 éven felülieknek", en: "Only for guests over 18" },
     body: {
-      hu: "A dohányt, a szenet, a csövet és a teljes összeállítást kizárólag a dolgozók kezelik.",
-      en: "The tobacco, the coals, the hose and the full setup are handled exclusively by our staff.",
+      hu: "Vízipipát csak 18 éven felüli vendégeink rendelhetnek. Kérésre igazolni kell az életkort.",
+      en: "Shisha is served only to guests aged 18+. ID may be requested.",
     },
   },
   {
-    title: { hu: "Kérés, panasz → személyzet", en: "Requests & complaints → staff" },
+    title: { hu: "A pipát a személyzet kezeli", en: "The staff handle the pipe" },
     body: {
-      hu: "Ha bármire szükséged van (erősebb/lazább füst, más íz, több szén, tiszta szipka, víz, rendelés), fordulj a dolgozókhoz. Ne próbáld magad állítani vagy „javítani” a pipát.",
-      en: "If you need anything (stronger/lighter smoke, a different flavour, more coals, a clean mouthpiece, water, another order), ask our staff. Please don't adjust or \"fix\" the pipe yourself.",
+      hu: "A pipát kizárólag a személyzet helyezheti át, töltheti újra és cserélheti a szenet.",
+      en: "Only staff may move, refill or change the coals of a pipe.",
     },
   },
   {
-    title: { hu: "Tisztaság és rend", en: "Cleanliness & order" },
+    title: { hu: "Higiéniai szipka", en: "Hygienic mouthpiece" },
     body: {
-      hu: "A hamutálat és a tálcát használd. Ne dobálj semmit a padlóra, és ne hagyj rendetlenséget az asztalon.",
-      en: "Use the ashtray and the tray. Please don't drop anything on the floor and don't leave the table messy.",
+      hu: "Minden pipához új, eldobható szipkát (munyókát) kapsz — higiéniai okokból a használata kötelező.",
+      en: "Every shisha comes with a new disposable mouthpiece tip — using it is compulsory for hygiene reasons.",
     },
   },
   {
-    title: { hu: "Általános viselkedés", en: "General behaviour" },
+    title: { hu: "Kár", en: "Damage" },
     body: {
-      hu: "Légy udvarias a többi vendéggel és a személyzettel. Hangoskodás, vitatkozás, agresszív viselkedés nem megengedett.",
-      en: "Be polite to other guests and to the staff. Loud arguing or aggressive behaviour is not allowed.",
-    },
-  },
-  {
-    title: { hu: "Saját dohány / saját vízipipa", en: "Own tobacco / own shisha" },
-    body: {
-      hu: "Saját dohány vagy saját vízipipa behozatala nem engedélyezett (kivéve, ha a hely külön engedi). Kérdezz rá a személyzetnél.",
-      en: "Bringing your own tobacco or shisha is not allowed (unless the venue allows it specifically). Ask our staff about it.",
+      hu: "A pipában vagy a berendezésben okozott kárt felszámítjuk.",
+      en: "Damage caused to the pipe or the equipment will be charged.",
     },
   },
 ];

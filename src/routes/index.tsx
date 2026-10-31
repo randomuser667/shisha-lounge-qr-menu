@@ -149,7 +149,11 @@ function MenuOverview() {
       </Link>
 
       <footer className="mt-14 text-center text-xs text-muted-foreground">
-        <p>{lang === "hu" ? "Az árak forintban, az ÁFA-t tartalmazzák." : "Prices in HUF, VAT included."}</p>
+        <p>
+          {lang === "hu"
+            ? "Az árak forintban, az ÁFA-t tartalmazzák. Árainkhoz 10% szervítdíjat számítunk fel."
+            : "Prices in HUF, VAT included. A 10% service charge is added to our prices."}
+        </p>
       </footer>
 
       <Link
