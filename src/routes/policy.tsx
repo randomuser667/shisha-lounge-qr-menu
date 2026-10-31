@@ -33,7 +33,7 @@ const RULES = [
   {
     title: { hu: "Higiéniai szipka", en: "Hygienic mouthpiece" },
     body: {
-      hu: "Minden pipához új, eldobható szipkát (munyókát) kapsz — higiéniai okokból a használata kötelező.",
+      hu: "Minden pipához új, eldobható szipkát kapsz — higiéniai okokból a használata kötelező.",
       en: "Every shisha comes with a new disposable mouthpiece tip — using it is compulsory for hygiene reasons.",
     },
   },
