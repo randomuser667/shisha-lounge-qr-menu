@@ -21,9 +21,12 @@ describe("Guest menu", () => {
     expect(cat("soft").items.find((i) => i.name.hu === "Coca Cola")?.price).toBe(790);
     expect(cat("spirits").items.find((i) => i.name.hu === "Zacapa XO")?.price).toBe(8290);
   });
-  it("keeps only popcorn, nachos and small snacks as food", () => {
-    expect(names("hot")).toEqual(expect.arrayContaining(["Sós popcorn", "Sajtos popcorn", "BBQ popcorn", "Nachos"]));
+  it("keeps only popcorn and nachos as food", () => {
+    expect(names("hot")).toEqual(expect.arrayContaining(["Sós popcorn", "Sajtos popcorn", "Vajas popcorn", "Nachos"]));
     expect(names("hot")).not.toContain("Csirkeszárnyak");
+    for (const gone of ["Sajtos snack", "Sós snack", "Vajas snack", "BBQ popcorn"]) {
+      expect(names("hot")).not.toContain(gone);
+    }
   });
   it("has no by-the-glass drinks in bottle service and Hungarian title says bottle service", () => {
     expect(names("deals")).not.toContain("Vodka Red Bull");
