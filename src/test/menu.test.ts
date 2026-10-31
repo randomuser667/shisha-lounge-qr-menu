@@ -1,66 +1,80 @@
 import { describe, expect, it } from "vitest";
-import { menu } from "@/lib/menu";
+import { buildMenu, categoryById, formatPrice } from "@/lib/menu";
+import { parseCSV, parseMenuCsv } from "@/lib/menu-csv";
 
-const cat = (id: string) => {
-  const category = menu.find((c) => c.id === id);
-  if (!category) throw new Error(`Missing category: ${id}`);
-  return category;
-};
-const names = (id: string) => cat(id).items.map((i) => i.name.hu);
+const HEADER =
+  "Kategória,Csoport (HU),Csoport (EN),Név,Név (EN),Leírás (HU),Leírás (EN),Ár (Ft),Elérhető,Legtöbbet rendelt";
 
-describe("Guest menu", () => {
-  it("lists sections in the bar's order", () => {
-    expect(menu.map((c) => c.id)).toEqual(["shisha", "cocktails", "deals", "spirits", "soft", "hot"]);
+const CSV = [
+  HEADER,
+  // szándékosan a kategóriák "rossz" sorrendjében, hogy a rendezést is lássuk
+  "Koktélok,,,Mojito,,\"Menta, lime\",\"Mint, lime\",2 590,igen,",
+  "Vízipipa,,,Blue ice,,,,6000,igen,igen",
+  "Vízipipa,,,Melon,,,,\"7.000 Ft\",,",
+  "Vízipipa,,,Régi íz,,,,6000,nem,",
+  "Üdítők,,,Coca Cola,Coca-Cola,,,790,igen,",
+  "Akciók és bottle service,Palackok,Bottles,Vodka palack,Vodka bottle,,,,igen,",
+  "Ismeretlen kategória,,,Valami,,,,100,igen,",
+].join("\r\n");
+
+describe("CSV parser", () => {
+  it("handles quoted commas, escaped quotes and mixed line endings", () => {
+    const rows = parseCSV('a,"b,c","d ""x"""\r\n1,2,3\n');
+    expect(rows).toEqual([
+      ["a", "b,c", 'd "x"'],
+      ["1", "2", "3"],
+    ]);
   });
-  it("prices premium shisha at 6000 Ft and hardcore at 7000 Ft", () => {
-    const s = cat("shisha").items;
-    expect(s.find((i) => i.name.hu === "Blue ice")?.price).toBe(6000);
-    expect(s.find((i) => i.name.hu === "Melon")?.price).toBe(7000);
+
+  it("skips rows marked unavailable and parses prices in any format", () => {
+    const items = parseMenuCsv(CSV);
+    expect(items.map((i) => i.name)).not.toContain("Régi íz");
+    expect(items.find((i) => i.name === "Mojito")?.price).toBe(2590);
+    expect(items.find((i) => i.name === "Melon")?.price).toBe(7000);
+    expect(items.find((i) => i.name === "Vodka palack")?.price).toBe(0);
+    expect(items.find((i) => i.name === "Blue ice")?.popular).toBe(true);
   });
-  it("uses the bar's soft drink and spirit prices", () => {
-    expect(cat("soft").items.find((i) => i.name.hu === "Coca Cola")?.price).toBe(790);
-    expect(cat("spirits").items.find((i) => i.name.hu === "Zacapa XO")?.price).toBe(8290);
+
+  it("rejects an empty sheet", () => {
+    expect(() => parseMenuCsv(HEADER)).toThrow();
   });
-  it("keeps only popcorn, nachos and small snacks as food", () => {
-    expect(names("hot")).toEqual(expect.arrayContaining(["Sós popcorn", "Sajtos popcorn", "BBQ popcorn", "Nachos"]));
-    expect(names("hot")).not.toContain("Csirkeszárnyak");
+});
+
+describe("Menu builder", () => {
+  const menu = buildMenu(parseMenuCsv(CSV));
+
+  it("lists sections in the bar's order and drops unknown categories", () => {
+    expect(menu.map((c) => c.id)).toEqual(["shisha", "cocktails", "deals", "soft"]);
   });
-  it("has no by-the-glass drinks in bottle service and Hungarian title says bottle service", () => {
-    expect(names("deals")).not.toContain("Vodka Red Bull");
-    expect(cat("deals").title.hu).toContain("bottle service");
+
+  it("keeps Hungarian and English names, falling back to Hungarian", () => {
+    const soft = menu.find((c) => c.id === "soft")!;
+    expect(soft.items[0]!.name).toEqual({ hu: "Coca Cola", en: "Coca-Cola" });
+    const shisha = menu.find((c) => c.id === "shisha")!;
+    expect(shisha.items[0]!.name).toEqual({ hu: "Blue ice", en: "Blue ice" });
   });
-  it("never lists fries", () => {
-    expect(menu.flatMap((c) => c.items).some((i) => /fries|hasáb/i.test(i.name.en + (i.desc?.en ?? "")))).toBe(false);
+
+  it("keeps descriptions, groups and missing prices", () => {
+    const cocktail = menu.find((c) => c.id === "cocktails")!.items[0]!;
+    expect(cocktail.desc).toEqual({ hu: "Menta, lime", en: "Mint, lime" });
+    const bottle = menu.find((c) => c.id === "deals")!.items[0]!;
+    expect(bottle.group).toEqual({ hu: "Palackok", en: "Bottles" });
+    expect(bottle.price).toBeUndefined();
   });
-  it("lists the bar's 21 cocktails plus the three shots at the bottom", () => {
-    const items = cat("cocktails").items;
-    expect(items).toHaveLength(24);
-    expect(items.find((i) => i.name.hu === "Aperol Spritz")?.price).toBe(2290);
-    expect(items.find((i) => i.name.hu === "Long Island")?.price).toBe(3590);
-    expect(items.slice(-3).map((i) => i.name.hu)).toEqual(["Speed shot", "Hashtag shot", "Happy shot"]);
-    expect(items.slice(-3).map((i) => i.price)).toEqual([4400, 3000, 3450]);
-    expect(cat("cocktails").title.hu).toContain("shot");
-    expect(names("cocktails")).not.toContain("Golden Hashtag");
-    expect(names("cocktails")).not.toContain("Gin Tonic");
+
+  it("returns an empty menu for an empty sheet", () => {
+    expect(buildMenu([])).toEqual([]);
   });
-  it("has no Zero Proof deal", () => {
-    expect(names("deals")).not.toContain("Zero Proof, Full Vibe");
+});
+
+describe("Helpers", () => {
+  it("resolves known category ids without menu data", () => {
+    expect(categoryById("shisha")?.title.en).toBe("Shisha");
+    expect(categoryById("nincs-ilyen")).toBeUndefined();
   });
-  it("has no bestseller metadata anywhere", () => {
-    expect(menu.flatMap((c) => c.items).filter((item) => "mostOrdered" in item)).toEqual([]);
-  });
-  it("removes unusual dessert and floral shisha blends while retaining lounge classics", () => {
-    const flavors = names("shisha");
-    for (const removed of ["English mix", "Jungle", "Eterna", "Prada", "Levander lemonade"]) {
-      expect(flavors).not.toContain(removed);
-    }
-    expect(flavors).toEqual(expect.arrayContaining(["Blue ice", "Grape mint", "Love66", "Ladykiller", "Melon"]));
-    expect(flavors).toHaveLength(37);
-  });
-  it("keeps all 21 cocktails in a continuous order with Mojito seventh", () => {
-    const cocktails = cat("cocktails").items.slice(0, -3);
-    expect(cocktails).toHaveLength(21);
-    expect(cocktails.slice(5, 8).map((item) => item.name.hu)).toEqual(["Fiero Tonic", "Mojito", "Mojito eper"]);
-    expect(cocktails.every((item) => item.name.hu.trim().length > 0)).toBe(true);
+
+  it("formats prices with a non-breaking thousands separator", () => {
+    expect(formatPrice(6000)).toBe("6 000 Ft");
+    expect(formatPrice(790)).toBe("790 Ft");
   });
 });

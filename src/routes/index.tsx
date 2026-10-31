@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { menu, formatPrice } from "@/lib/menu";
+import { formatPrice } from "@/lib/menu";
+import { useMenu } from "@/lib/use-menu";
 import { useLang, LangToggle } from "@/lib/lang";
+import { MenuError, MenuLoading } from "@/components/menu-status";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -89,6 +91,7 @@ function SmokeLayer({ variant, puffs }: { variant: string; puffs: Puff[] }) {
 
 function MenuOverview() {
   const { lang } = useLang();
+  const { menu, status, retry } = useMenu();
 
   return (
     <div className="mx-auto max-w-xl px-5 pb-16">
@@ -101,9 +104,13 @@ function MenuOverview() {
         {lang === "hu" ? "Étlap" : "Menu"}
       </p>
 
+      {status === "loading" && <MenuLoading />}
+      {status === "error" && <MenuError onRetry={retry} />}
+
       <ul className="mt-6 space-y-3">
         {menu.map((c) => {
-          const from = Math.min(...c.items.flatMap((i) => (i.price == null ? [] : [i.price])));
+          const prices = c.items.flatMap((i) => (i.price == null ? [] : [i.price]));
+          const from = prices.length > 0 ? Math.min(...prices) : null;
            const smoke = SMOKE[c.id] ?? SMOKE["cocktails"];
           return (
             <li key={c.id}>
@@ -117,10 +124,12 @@ function MenuOverview() {
                   <span className="block font-display text-2xl">{c.title[lang]}</span>
                   <span className="mt-1 block text-xs text-muted-foreground">
                     {c.items.length} {lang === "hu" ? "tétel" : "items"}
-                    <span className="text-gold/80">
-                      {" · "}
-                      {lang === "hu" ? `${formatPrice(from)}-től` : `from ${formatPrice(from)}`}
-                    </span>
+                    {from != null && (
+                      <span className="text-gold/80">
+                        {" · "}
+                        {lang === "hu" ? `${formatPrice(from)}-től` : `from ${formatPrice(from)}`}
+                      </span>
+                    )}
                   </span>
                 </span>
                 <svg
