@@ -1,4 +1,4 @@
-import { menuData } from "./menu-data";
+import type { RawItem } from "./menu-csv";
 
 export type Lang = "hu" | "en";
 type T = { hu: string; en: string };
@@ -33,22 +33,13 @@ const CATEGORY_MAP: Record<string, { id: string; title: T }> = {
   },
 };
 
-type Raw = {
-  category: string;
-  groupHu: string;
-  groupEn: string;
-  name: string;
-  nameEn: string;
-  desc: string;
-  descEn: string;
-  price: number;
-  popular: boolean;
-};
+/** Ismert kategória id alapján (az étlap adatai nélkül is elérhető). */
+export function categoryById(id: string): { id: string; title: T } | undefined {
+  return Object.values(CATEGORY_MAP).find((c) => c.id === id);
+}
 
-const raw: Raw[] = (menuData as any) || [];
-
-/** A táblázat adataiból építi fel a régi formátumot */
-function buildMenu(): Category[] {
+/** A táblázat soraiból építi fel a kategóriákat (a megadott sorrendben). */
+export function buildMenu(raw: RawItem[]): Category[] {
   const order = [
     "Vízipipa",
     "Koktélok",
@@ -58,7 +49,7 @@ function buildMenu(): Category[] {
     "Snackek és forró italok",
   ];
 
-  const byCat = new Map<string, Raw[]>();
+  const byCat = new Map<string, RawItem[]>();
 
   for (const item of raw) {
     if (!item.name) continue;
@@ -114,8 +105,6 @@ function buildMenu(): Category[] {
 
   return result;
 }
-
-export const menu: Category[] = buildMenu();
 
 export function formatPrice(n: number): string {
   return `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0")} Ft`;

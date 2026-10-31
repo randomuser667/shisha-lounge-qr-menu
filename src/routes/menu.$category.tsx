@@ -1,14 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { menu, formatPrice, type Category } from "@/lib/menu";
+import { categoryById, formatPrice } from "@/lib/menu";
+import { useMenu } from "@/lib/use-menu";
 import { useLang, LangToggle } from "@/lib/lang";
+import { MenuError, MenuLoading } from "@/components/menu-status";
 import { Fragment } from "react";
 
 export const Route = createFileRoute("/menu/$category")({
   head: ({ params }) => {
-    const cat = menu.find((c) => c.id === params.category);
+    const cat = categoryById(params.category);
     const title = cat ? `${cat.title.en} — #Hashtag` : "#Hashtag";
     const desc = cat
-      ? `${cat.title.en} at #Hashtag shisha lounge — ${cat.items.length} items.`
+      ? `${cat.title.en} at #Hashtag shisha lounge.`
       : "Menu at #Hashtag shisha lounge.";
     return {
       meta: [
@@ -21,10 +23,9 @@ export const Route = createFileRoute("/menu/$category")({
       ],
     };
   },
-  loader: ({ params }): Category => {
-    const cat = menu.find((c) => c.id === params.category);
-    if (!cat) throw notFound();
-    return cat;
+  // Az étlap tartalma a böngészőben töltődik be; itt csak az ismeretlen címeket szűrjük ki.
+  loader: ({ params }) => {
+    if (!categoryById(params.category)) throw notFound();
   },
   component: CategorySlide,
 });
@@ -89,9 +90,24 @@ function BackButton({ label }: { label: string }) {
 
 function CategorySlide() {
   const { category } = Route.useParams();
+  const { menu, status, retry } = useMenu();
   const cat = menu.find((entry) => entry.id === category);
   const { lang } = useLang();
-  if (!cat) throw notFound();
+
+  if (!cat) {
+    // Betöltés közben vagy hiba esetén keret + állapotjelzés; csak akkor 404,
+    // ha az étlap már megvan, de ebben a kategóriában nincs tétel.
+    if (status === "ready") throw notFound();
+    return (
+      <div className="mx-auto max-w-xl px-5 pb-16">
+        <div className="sticky top-0 z-10 -mx-5 flex items-center justify-between gap-3 bg-background/85 px-5 py-3 backdrop-blur">
+          <BackButton label={lang === "hu" ? "Vissza" : "Back"} />
+          <LangToggle />
+        </div>
+        {status === "error" ? <MenuError onRetry={retry} /> : <MenuLoading />}
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-xl px-5 pb-16">
