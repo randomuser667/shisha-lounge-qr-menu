@@ -11,3 +11,4 @@
 
 - Keep all guest menu categories in the shared bilingual menu catalog and render them through the existing category route, so additions stay consistent across the menu list and detail pages.
 - Represent optional subsection headings as menu-item metadata so the shared category view handles bottle-service groups consistently; the catalog has no popularity field because the menu does not display bestseller markings.
+- Keep the menu items and prices inline in `src/lib/menu.ts`; do not move them into a separate generated data file, because a generated file that is never committed leaves the whole site unbuildable.
