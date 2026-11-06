@@ -10,10 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as PolicyRouteImport } from './routes/policy'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as MenuCategoryRouteImport } from './routes/menu.$category'
 
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const MenuCategoryRoute = MenuCategoryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/policy': typeof PolicyRoute
   '/qr': typeof QrRoute
   '/menu/$category': typeof MenuCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/policy': typeof PolicyRoute
   '/qr': typeof QrRoute
   '/menu/$category': typeof MenuCategoryRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/policy': typeof PolicyRoute
   '/qr': typeof QrRoute
   '/menu/$category': typeof MenuCategoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/policy' | '/qr' | '/menu/$category'
+  fullPaths: '/' | '/admin' | '/policy' | '/qr' | '/menu/$category'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/policy' | '/qr' | '/menu/$category'
-  id: '__root__' | '/' | '/policy' | '/qr' | '/menu/$category'
+  to: '/' | '/admin' | '/policy' | '/qr' | '/menu/$category'
+  id: '__root__' | '/' | '/admin' | '/policy' | '/qr' | '/menu/$category'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   PolicyRoute: typeof PolicyRoute
   QrRoute: typeof QrRoute
   MenuCategoryRoute: typeof MenuCategoryRoute
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/policy': {
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   PolicyRoute: PolicyRoute,
   QrRoute: QrRoute,
   MenuCategoryRoute: MenuCategoryRoute,

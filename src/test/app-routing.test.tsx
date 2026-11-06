@@ -14,4 +14,16 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+
+  it("has an /admin page that is not hidden behind the 404 fallback", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+
+    expect(router.matchRoutes("/admin").at(-1)?.routeId).toBe("/admin");
+  });
+
+  it("still matches the category pages", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+
+    expect(router.matchRoutes("/menu/shisha").at(-1)?.routeId).toBe("/menu/$category");
+  });
 });

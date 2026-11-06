@@ -1,11 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { menu, formatPrice, type Category } from "@/lib/menu";
+import { formatPrice, isUnavailable, type Category } from "@/lib/menu";
+import { loadMenu } from "@/lib/public-menu";
 import { useLang, LangToggle } from "@/lib/lang";
 import { Fragment } from "react";
 
 export const Route = createFileRoute("/menu/$category")({
-  head: ({ params }) => {
-    const cat = menu.find((c) => c.id === params.category);
+  head: ({ loaderData }) => {
+    const cat = loaderData;
     const title = cat ? `${cat.title.en} — #Hashtag` : "#Hashtag";
     const desc = cat
       ? `${cat.title.en} at #Hashtag shisha lounge — ${cat.items.length} items.`
@@ -21,11 +22,13 @@ export const Route = createFileRoute("/menu/$category")({
       ],
     };
   },
-  loader: ({ params }): Category => {
+  loader: async ({ params }): Promise<Category> => {
+    const menu = await loadMenu();
     const cat = menu.find((c) => c.id === params.category);
     if (!cat) throw notFound();
     return cat;
   },
+  staleTime: 30_000,
   component: CategorySlide,
 });
 
@@ -88,10 +91,8 @@ function BackButton({ label }: { label: string }) {
 }
 
 function CategorySlide() {
-  const { category } = Route.useParams();
-  const cat = menu.find((entry) => entry.id === category);
+  const cat = Route.useLoaderData();
   const { lang } = useLang();
-  if (!cat) throw notFound();
 
   return (
     <div className="mx-auto max-w-xl px-5 pb-16">
@@ -110,20 +111,38 @@ function CategorySlide() {
       </section>
 
       <ul className="space-y-3">
-         {cat.items.map((item, i) => (
-           <Fragment key={i}>
-           {item.group && <li className="pt-5 pb-1"><h2 className="font-display text-lg text-gold">{item.group[lang]}</h2></li>}
-          <li
-            className="rounded-xl border bg-card/70 p-4 animate-in fade-in slide-in-from-bottom-2"
-          >
-             <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-               <h3 className="min-w-0 font-display text-lg break-words">{item.name[lang]}</h3>
-               {item.price != null && <span className="shrink-0 whitespace-nowrap font-semibold text-gold">{formatPrice(item.price)}</span>}
-            </div>
-            {item.desc && <p className="mt-1 text-sm text-muted-foreground">{item.desc[lang]}</p>}
-          </li>
-           </Fragment>
-        ))}
+        {cat.items.map((item, i) => {
+          const out = isUnavailable(item);
+          return (
+            <Fragment key={item.id ?? i}>
+              {item.group && (
+                <li className="pt-5 pb-1">
+                  <h2 className="font-display text-lg text-gold">{item.group[lang]}</h2>
+                </li>
+              )}
+              <li
+                className={`rounded-xl border bg-card/70 p-4 animate-in fade-in slide-in-from-bottom-2${out ? " opacity-60" : ""}`}
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                  <h3 className="min-w-0 font-display text-lg break-words">{item.name[lang]}</h3>
+                  <span className="flex shrink-0 items-baseline gap-2 whitespace-nowrap">
+                    {out && (
+                      <span className="rounded-full border border-destructive/60 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-destructive">
+                        {lang === "hu" ? "Elfogyott" : "Sold out"}
+                      </span>
+                    )}
+                    {item.price != null && (
+                      <span className={`font-semibold text-gold${out ? " line-through" : ""}`}>
+                        {formatPrice(item.price)}
+                      </span>
+                    )}
+                  </span>
+                </div>
+                {item.desc && <p className="mt-1 text-sm text-muted-foreground">{item.desc[lang]}</p>}
+              </li>
+            </Fragment>
+          );
+        })}
       </ul>
 
       <div className="mt-10 flex justify-center">
