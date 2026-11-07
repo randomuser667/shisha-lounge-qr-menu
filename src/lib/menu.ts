@@ -2,8 +2,30 @@ export type Lang = "hu" | "en";
 type T = { hu: string; en: string };
 
 // price is optional: items without a known price show no price yet.
-export type MenuItem = { name: T; desc?: T; price?: number; group?: T };
+// id: stable key used by the admin editor (added by withIds, absent in the static list).
+// soldOut: manual "out of stock" switch. stock: optional quantity (undefined = not tracked).
+// group: section heading shown above this item.
+export type MenuItem = {
+  id?: string;
+  name: T;
+  desc?: T;
+  price?: number;
+  group?: T;
+  soldOut?: boolean;
+  stock?: number;
+};
 export type Category = { id: string; title: T; items: MenuItem[] };
+
+// An item is unavailable when switched off by hand or when a tracked stock hit zero.
+export const isUnavailable = (item: MenuItem): boolean =>
+  item.soldOut === true || (typeof item.stock === "number" && item.stock <= 0);
+
+// Gives every item a stable id ("shisha-1", "shisha-2", ...) without touching existing ones.
+export const withIds = (cats: Category[]): Category[] =>
+  cats.map((c) => ({
+    ...c,
+    items: c.items.map((item, i) => ({ ...item, id: item.id ?? `${c.id}-${i + 1}` })),
+  }));
 
 export const menu: Category[] = [
   {
