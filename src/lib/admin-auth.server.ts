@@ -5,6 +5,7 @@
 import {
   deleteCookie,
   getCookie,
+  getRequest,
   getRequestHeader,
   getRequestIP,
   setCookie,
@@ -118,6 +119,21 @@ function recordFail(key: string) {
   if (fails.size > 500) fails.clear();
 }
 
+// ---------- cookie flags ----------
+
+// A "Secure" cookie is silently dropped by browsers when it is set over plain
+// http, which made the login bounce back to the form. So the flag follows the
+// real connection: Secure unless the request is explicitly plain http.
+function isPlainHttp(): boolean {
+  const forwarded = getRequestHeader("x-forwarded-proto")?.split(",")[0]?.trim().toLowerCase();
+  if (forwarded) return forwarded === "http";
+  try {
+    return new URL(getRequest().url).protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
 // ---------- public API used by the server functions ----------
 
 export type LoginResult = { ok: true } | { ok: false; error: string };
@@ -146,7 +162,7 @@ export async function login(user: unknown, password: unknown): Promise<LoginResu
   fails.delete(key);
   setCookie(COOKIE, await makeToken(cfg), {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production" && !isPlainHttp(),
     sameSite: "strict",
     path: "/",
     maxAge: SESSION_SECONDS,
