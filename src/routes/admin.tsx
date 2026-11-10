@@ -38,6 +38,13 @@ function AdminPage() {
   const [phase, setPhase] = useState<Phase>("loading");
 
   useEffect(() => {
+    // The password must never travel over plain http: switch to https first.
+    const { protocol, hostname, href } = window.location;
+    const local = hostname === "localhost" || hostname === "127.0.0.1";
+    if (protocol === "http:" && !local) {
+      window.location.replace(href.replace(/^http:/, "https:"));
+      return;
+    }
     adminSession()
       .then((s) => setPhase(!s.configured ? "unconfigured" : s.authed ? "app" : "login"))
       .catch(() => setPhase("login"));
